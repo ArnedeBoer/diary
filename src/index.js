@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Match, Miss } from 'react-router';
 
-// import './css/style.css';
+import './styles/css/style.css';
 import Diary from './components/Diary';
 import NotFound from './components/NotFound';
 
