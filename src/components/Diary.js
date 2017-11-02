@@ -1,10 +1,13 @@
 import React from 'react';
+import Pages from './Pages';
+import Filters from './Filters';
 
 class Diary extends React.Component {
   render() {
     return (
       <div className="diary">
-        <p>This is your diary</p>
+        <Pages />
+        <Filters />
       </div>
     )
   }

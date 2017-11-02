@@ -1,0 +1,39 @@
+.pages {
+    float: left;
+    width: 80%;
+    margin-top: 3rem;
+
+    .page {
+        width: 80%;
+        display: block;
+        margin: auto;
+        margin-bottom: 3rem;
+        background-color: lightgray;
+        padding: 40px;
+        border-radius: 20px;
+
+        .date {
+            margin-bottom: 1rem;
+        }
+
+        .left {
+            float: left;
+            display: block;
+            width: 80%;
+        }
+
+        .right {
+            float: right;
+            display: block;
+            width: 20%;
+
+            ul {
+                margin: auto;
+            }
+
+            .buffer {
+                height: 2rem;
+            }
+        }
+    }
+}
