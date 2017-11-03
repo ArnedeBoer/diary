@@ -2,7 +2,7 @@
   "name": "diary",
   "version": "1.0.0",
   "description": "Final Project NYCDA",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start-js": "react-scripts start",
     "build-css": "node-sass-chokidar src/styles/sass/ -o src/styles/css/",
@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/ArnedeBoer/diary#readme",
   "dependencies": {
+    "axios": "^0.17.0",
+    "express": "^4.16.2",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.1",
     "react": "15.3.2",
@@ -30,6 +32,7 @@
     "react-router": "4.0.0-alpha.4"
   },
   "devDependencies": {
+    "nodemon": "^1.12.1",
     "react-scripts": "0.6.1"
   }
 }
