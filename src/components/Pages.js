@@ -1,9 +1,7 @@
 import React from 'react';
 import Page from './Page';
-import axios from 'axios';
 
 class Pages extends React.Component {
-
     constructor() {
         super();
 
@@ -14,30 +12,11 @@ class Pages extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/diary')
+        fetch('http://localhost:8080/api/page/all')
             .then(res => {
-                const pages = [
-                    {
-                        date: '2017-09-09',
-                        text: 'Zeroth text'
-                    },
-                    {
-                        date: '2017-10-10',
-                        text: 'First text',
-                        people: ['Bob', 'Frank']
-                        },
-                    {
-                        date: '2017-11-11',
-                        text: 'Second text',
-                        locations: ['Bar Betta', 'Hanoi Social Club']
-                    },
-                    {
-                        date: '2017-12-12',
-                        text: 'Third text',
-                        people: ['Harry', 'Chris', 'Bob'],
-                        locations: ['Cho Shim']
-                    }
-                ];
+                return res.json();
+            })
+            .then(pages => {
                 this.setState({ pages });
             });
         }

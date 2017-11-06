@@ -1,16 +1,22 @@
 const express = require('express');
 const app = express();
+const request = require('request');
+const bodyParser = require('body-parser');
+const baseUrl = 'http://localhost:8080';
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+require('./../server/routes')(app);
 
 app.get('/diary', (req, res) => {
-    const pages = [
-        {
-            date: '2017-05-05',
-            text: 'extra text'
+    request(`${baseUrl}/api/page/all`, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+            res.send({ pages: JSON.parse(body) });
         }
-    ];
-
-    res.send(pages);
+    });
 });
+
 
 app.listen(8080, () => {
     console.log('server started at 8080');
