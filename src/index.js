@@ -8,15 +8,15 @@ import NotFound from './components/NotFound';
 import addPage from './components/addPage';
 
 const Root = () => {
-  return (
-    <BrowserRouter>
-      <div>
-        <Match exactly pattern="/" component={Diary} />
-        <Match exactly pattern="/addPage" component={addPage} />
-        <Miss component={NotFound} />
-      </div>
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter>
+            <div>
+                <Match exactly pattern="/" component={Diary} />
+                <Match exactly pattern="/addPage" component={addPage} />
+                <Miss component={NotFound} />
+            </div>
+        </BrowserRouter>
+    )
 }
 
 render(<Root/>, document.querySelector('#main'));
