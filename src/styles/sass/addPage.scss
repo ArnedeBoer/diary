@@ -1,0 +1,22 @@
+.addPage > * {
+    margin: 30px auto;
+    width: 500px;
+    display: block;
+
+    label, input, textarea {
+        display: block;
+    }
+
+    input, textarea {
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 500px;
+        height: 250px;
+    }
+
+    #people, #locations {
+        width: 500px;
+    }
+}

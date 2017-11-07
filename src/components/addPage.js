@@ -33,7 +33,7 @@ class Filters extends React.Component {
                 <h1>Add page</h1>
                 <form id="addPage" onSubmit={this.handleSubmit}>
                     <label>Date:</label><input id="date" className="text-field" type="text" name="date" />
-                    <label>Text:</label><input id="text" className="text-field" type="text" name="text" />
+                    <label>Text:</label><textarea id="text" className="text-field" type="text" name="text" />
                     <label>People:</label><input id="people" className="text-field" type="text" name="people" />
                     <label>Locations:</label><input id="locations" className="text-field" type="text" name="locations" />
                     <input id="submit" type="submit" />
