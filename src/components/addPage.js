@@ -15,7 +15,7 @@ class Filters extends React.Component {
 
         const userid = '1';
 
-        fetch(`http://localhost:8080/api/page/create/${userid}`, {
+        fetch(`/api/page/create/${userid}`, {
             method: "POST",
             body: JSON.stringify(page),
             headers: {
