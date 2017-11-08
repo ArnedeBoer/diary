@@ -8,6 +8,7 @@ module.exports = app => {
     app.post('/api/user/create', usersController.create);
 
     app.get('/api/page/all', pagesController.list);
+    app.post('/api/page/filter', pagesController.filter);
     app.get('/api/page/:pageid', pagesController.retrieve);
     app.post('/api/page/create/:userid', pagesController.create);
 };

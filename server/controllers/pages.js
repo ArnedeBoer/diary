@@ -1,4 +1,6 @@
 const Page = require('../models').Page;
+const Op = require('sequelize').Op;
+const moment = require('moment');
 
 module.exports = {
     create(req, res) {
@@ -30,6 +32,25 @@ module.exports = {
                 }
                 return res.status(200).send(page);
             })
+            .catch(error => res.status(400).send(error));
+    },
+    filter(req, res) {
+        const isDate = input => moment(input, 'YYYY-MM-DD', true).isValid();
+        const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : -Infinity;
+        const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : Infinity;
+
+        return Page
+            .findAll({
+                where: {
+                    date: {
+                        [Op.and]: {
+                            [Op.gte]: dateStart,
+                            [Op.lte]: dateEnd
+                        }
+                    }
+                }
+            })
+            .then(pages => res.status(200).send(pages))
             .catch(error => res.status(400).send(error));
     }
 };

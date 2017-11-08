@@ -57,7 +57,6 @@ class Filters extends React.Component {
                     <input
                         id="date"
                         className="text-field"
-                        placeholder="2017-01-01"
                         onChange={this.handleChange}
                         type="date"
                         name="date"
