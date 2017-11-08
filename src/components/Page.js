@@ -5,7 +5,6 @@ class Page extends React.Component {
         const { details } = this.props;
         let peopleList;
         let locationsList;
-        let buffer;
 
         if ( details.people !== null ) {
             const people = details.people.map((value, index) => {
@@ -24,10 +23,6 @@ class Page extends React.Component {
             });
             locationsList = <div className="locations"><ul><h4>Locations:</h4>{locations}</ul></div>
         }
-
-        if ( details.people !== null && details.locations !== null ) {
-            buffer = <div className="buffer"></div>
-        }
         
         return (
             <div className="page">
@@ -38,7 +33,6 @@ class Page extends React.Component {
 
                 <div className="right">
                     {peopleList}
-                    {buffer}
                     {locationsList}
                 </div>
                 <div style={{clear: 'both'}}></div>

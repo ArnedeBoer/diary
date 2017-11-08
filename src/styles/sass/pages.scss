@@ -31,8 +31,12 @@
                 margin: auto;
             }
 
-            .buffer {
-                height: 2rem;
+            .people + .locations {
+                margin-top: 20px;
+            }
+
+            .people:empty + .locations {
+                margin-top: 0;
             }
         }
     }
