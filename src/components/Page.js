@@ -1,4 +1,5 @@
 import React from 'react';
+import dateformat from 'dateformat';
 
 class Page extends React.Component {
     render() {
@@ -26,7 +27,7 @@ class Page extends React.Component {
         
         return (
             <div className="page">
-                <div className="date"><h2>{details.date}</h2></div>
+                <div className="date"><h2>{dateformat(details.date, 'mmmm dS yyyy')}</h2></div>
                 <div className="left">
                     <div className="text">{details.text}</div>
                 </div>
