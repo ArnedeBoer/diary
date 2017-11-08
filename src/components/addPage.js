@@ -1,11 +1,10 @@
 import React from 'react';
+import { trimArray, getValue } from './../helpers.js';
 
 class Filters extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        const trimArray = array => array.map(value => value.trim());
-        const getValue = field => document.getElementById(field).value;
         const page = {
             date: getValue('date'),
             text: getValue('text'),
