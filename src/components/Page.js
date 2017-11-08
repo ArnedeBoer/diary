@@ -7,7 +7,7 @@ class Page extends React.Component {
         let locationsList;
         let buffer;
 
-        if ( details.people !== undefined ) {
+        if ( details.people !== null ) {
             const people = details.people.map((value, index) => {
                 return (
                     <li key={index}>{value}</li>
@@ -16,7 +16,7 @@ class Page extends React.Component {
             peopleList = <div className="people"><ul><h4>People:</h4>{people}</ul></div>
         }
 
-        if ( details.locations !== undefined ) {
+        if ( details.locations !== null ) {
             const locations = details.locations.map((value, index) => {
                 return (
                     <li key={index}>{value}</li>
@@ -25,7 +25,7 @@ class Page extends React.Component {
             locationsList = <div className="locations"><ul><h4>Locations:</h4>{locations}</ul></div>
         }
 
-        if ( details.people !== undefined && details.locations !== undefined ) {
+        if ( details.people !== null && details.locations !== null ) {
             buffer = <div className="buffer"></div>
         }
         
