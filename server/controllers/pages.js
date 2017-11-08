@@ -39,13 +39,23 @@ module.exports = {
         const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : -Infinity;
         const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : Infinity;
 
+        console.log(req.body.people);
+
         return Page
             .findAll({
                 where: {
-                    date: {
-                        [Op.and]: {
-                            [Op.gte]: dateStart,
-                            [Op.lte]: dateEnd
+                    [Op.and]: {
+                        date: {
+                            [Op.and]: {
+                                [Op.gte]: dateStart,
+                                [Op.lte]: dateEnd
+                            }
+                        },
+                        people: {
+                            [Op.contains]: req.body.people
+                        },
+                        locations: {
+                            [Op.contains]: req.body.locations
                         }
                     }
                 }
