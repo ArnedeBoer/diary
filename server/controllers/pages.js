@@ -43,8 +43,6 @@ module.exports = {
         const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : -Infinity;
         const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : Infinity;
 
-        console.log(req.body.people);
-
         return Page
             .findAll({
                 where: {

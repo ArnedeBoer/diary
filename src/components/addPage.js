@@ -1,5 +1,5 @@
 import React from 'react';
-import { getValue, processArray } from './../helpers.js';
+import { getValue, emptyStringToNull, processArray } from './../helpers.js';
 
 class Filters extends React.Component {
     constructor() {
@@ -23,8 +23,8 @@ class Filters extends React.Component {
         event.preventDefault();
 
         const page = {
-            date: getValue('date'),
-            text: getValue('text'),
+            date: emptyStringToNull(getValue('date')),
+            text: emptyStringToNull(getValue('text')),
             people: processArray(getValue('people')),
             locations: processArray(getValue('locations'))
         }
@@ -39,7 +39,9 @@ class Filters extends React.Component {
             }
         })
         .then(res => {
-            console.log(res);
+            if (res.status === 201) {
+                document.getElementById('addPage').reset();
+            }
         });
     };
 

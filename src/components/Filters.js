@@ -19,13 +19,8 @@ class Filters extends React.Component {
                 "Content-Type": "application/json"
             }
         })
-        .then(res => {
-            console.log(res);
-            return res.json();
-        })
-        .then(pages => {
-            this.props.setPages(pages);
-        });
+        .then(res => res.json())
+        .then(pages => this.props.setPages(pages));
     };
 
     render() {
