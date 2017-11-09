@@ -42,25 +42,30 @@ module.exports = {
         const isDate = input => moment(input, 'YYYY-MM-DD', true).isValid();
         const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : -Infinity;
         const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : Infinity;
+        const filters = {
+            date: {
+                [Op.and]: {
+                    [Op.gte]: dateStart,
+                    [Op.lte]: dateEnd
+                }
+            }
+        };
+
+        if (req.body.people !== null) {
+            filters.people = {
+                [Op.contains]: req.body.people
+            };
+        }
+
+        if (req.body.locations !== null) {
+            filters.locations = {
+                [Op.contains]: req.body.locations
+            };
+        }
 
         return Page
             .findAll({
-                where: {
-                    [Op.and]: {
-                        date: {
-                            [Op.and]: {
-                                [Op.gte]: dateStart,
-                                [Op.lte]: dateEnd
-                            }
-                        },
-                        people: {
-                            [Op.contains]: req.body.people
-                        },
-                        locations: {
-                            [Op.contains]: req.body.locations
-                        }
-                    }
-                },
+                where: filters,
                 order: [
                     ['date', 'DESC']
                 ]
