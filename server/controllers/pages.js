@@ -17,7 +17,11 @@ module.exports = {
     },
     list(req, res) {
         return Page
-            .findAll()
+            .findAll({
+                order: [
+                    ['date', 'DESC']
+                ]
+            })
             .then(pages => res.status(200).send(pages))
             .catch(error => res.status(400).send(error));
     },
@@ -58,7 +62,10 @@ module.exports = {
                             [Op.contains]: req.body.locations
                         }
                     }
-                }
+                },
+                order: [
+                    ['date', 'DESC']
+                ]
             })
             .then(pages => res.status(200).send(pages))
             .catch(error => res.status(400).send(error));
