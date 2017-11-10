@@ -40,26 +40,37 @@ module.exports = {
     },
     filter(req, res) {
         const isDate = input => moment(input, 'YYYY-MM-DD', true).isValid();
-        const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : -Infinity;
-        const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : Infinity;
-        const filters = {
-            date: {
-                [Op.and]: {
-                    [Op.gte]: dateStart,
-                    [Op.lte]: dateEnd
-                }
-            }
-        };
+        const people = req.body.people;
+        const locations = req.body.locations;
+        const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : null;
+        const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : null;
 
-        if (req.body.people !== null) {
-            filters.people = {
-                [Op.contains]: req.body.people
+        const filters = {};
+
+        if (dateStart !== null && dateEnd !== null) {
+            filters.date = {
+                [Op.gte]: dateStart,
+                [Op.lte]: dateEnd
+            };
+        } else if (dateStart !== null) {
+            filters.date = {
+                [Op.gte]: dateStart
+            };
+        } else if (dateEnd !== null) {
+            filters.date = {
+                [Op.lte]: dateEnd
             };
         }
 
-        if (req.body.locations !== null) {
+        if (people !== null) {
+            filters.people = {
+                [Op.contains]: people
+            };
+        }
+
+        if (locations !== null) {
             filters.locations = {
-                [Op.contains]: req.body.locations
+                [Op.contains]: locations
             };
         }
 
