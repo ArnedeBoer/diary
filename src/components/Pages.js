@@ -6,9 +6,8 @@ class Pages extends React.Component {
         return (
             <div className="pages">
                 {
-                    Object
-                        .keys(this.props.pages)
-                        .map(key => <Page key={key} details={this.props.pages[key]} />)
+                    this.props.pages
+                        .map((page, index) => <Page key={index} details={this.props.pages[index]} />)
                 }
             </div>
         )

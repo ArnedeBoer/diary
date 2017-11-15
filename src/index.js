@@ -3,10 +3,10 @@ import { render } from 'react-dom';
 import { BrowserRouter, Match, Miss } from 'react-router';
 
 import './styles/css/style.css';
-import Diary from './components/Diary';
-import NotFound from './components/NotFound';
-import AddPage from './components/AddPage';
 import Menu from './components/Menu';
+import Diary from './components/Diary';
+import AddPage from './components/AddPage';
+import NotFound from './components/NotFound';
 
 const Root = () => {
     return (

@@ -5,7 +5,7 @@ class Filters extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const page = {
+        const filters = {
             dateStart: getValue('dateStart'),
             dateEnd: getValue('dateEnd'),
             people: processArray(getValue('people')),
@@ -14,7 +14,7 @@ class Filters extends React.Component {
 
         fetch('/api/page/filter', {
             method: "POST",
-            body: JSON.stringify(page),
+            body: JSON.stringify(filters),
             headers: {
                 "Content-Type": "application/json"
             }

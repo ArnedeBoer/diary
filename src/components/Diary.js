@@ -9,7 +9,7 @@ class Diary extends React.Component {
         this.setPages = this.setPages.bind(this);
 
         this.state = {
-            pages: {}
+            pages: []
         };
     }
 
