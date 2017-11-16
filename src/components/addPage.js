@@ -29,7 +29,7 @@ class Filters extends React.Component {
             locations: processArray(getValue('locations'))
         }
 
-        const userid = '1';
+        const userid = '2';
 
         fetch(`/api/page/create/${userid}`, {
             method: "POST",

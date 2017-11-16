@@ -83,5 +83,23 @@ module.exports = {
             })
             .then(pages => res.status(200).send(pages))
             .catch(error => res.status(400).send(error));
+    },
+    edit(req, res) {
+        return Page
+            .update(
+                {
+                    text: req.body.text,
+                    people: req.body.people,
+                    locations: req.body.locations
+                },
+                {
+                    where: {
+                        id: req.body.id,
+                        userid: req.body.userid
+                    }
+                }
+            )
+            .then(() => res.status(201).send('Success'))
+            .catch(error => res.status(400).send(error));
     }
 };

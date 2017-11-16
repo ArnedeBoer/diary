@@ -39,5 +39,28 @@
                 margin-top: 0;
             }
         }
+
+        form {
+            label, textarea, input {
+                display: block;
+            }
+
+            textarea, input {
+                margin-bottom: 20px;
+                width: 100%;
+            }
+
+            textarea {
+                height: 200px;
+            }
+        }
+
+        button {
+            padding: 10px 20px;
+        }
+
+        .info-end {
+            margin-bottom: 30px;
+        }
     }
 }

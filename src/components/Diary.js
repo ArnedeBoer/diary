@@ -22,6 +22,7 @@ class Diary extends React.Component {
             <div className="diary">
                 <Pages
                 pages={this.state.pages}
+                setPages={this.setPages}
                 />
                 <Filters
                 setPages={this.setPages}
