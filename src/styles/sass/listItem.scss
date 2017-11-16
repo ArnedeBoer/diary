@@ -1,9 +1,8 @@
-.pages {
+#left-column {
     float: left;
-    width: 80%;
-    margin-top: 3rem;
+    width: 60%;
 
-    .page {
+    .list-item {
         width: 80%;
         display: block;
         margin: auto;
@@ -12,7 +11,7 @@
         padding: 40px;
         border-radius: 20px;
 
-        .date {
+        .title {
             margin-bottom: 1rem;
         }
 
@@ -31,11 +30,11 @@
                 margin: auto;
             }
 
-            .people + .locations {
+            .sub-list {
                 margin-top: 20px;
             }
 
-            .people:empty + .locations {
+            .first-list:empty + .second-list {
                 margin-top: 0;
             }
         }
@@ -59,8 +58,8 @@
             padding: 10px 20px;
         }
 
-        .info-end {
-            margin-bottom: 30px;
+        button.edit {
+            margin-top: 30px;
         }
     }
 }

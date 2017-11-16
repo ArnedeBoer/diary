@@ -1,6 +1,6 @@
 import React from 'react';
 import dateformat from 'dateformat';
-import { getValue, emptyStringToNull, processArray } from './../helpers.js';
+import { getValue, emptyStringToNull, processArray } from './../../helpers.js';
 
 class Page extends React.Component {
     constructor() {
@@ -35,9 +35,9 @@ class Page extends React.Component {
         const { details } = this.props;
         const page = {
             id: details.id,
-            text: emptyStringToNull(getValue('text')),
-            people: processArray(getValue('people')),
-            locations: processArray(getValue('locations')),
+            text: emptyStringToNull(getValue('editText')),
+            people: processArray(getValue('editPeople')),
+            locations: processArray(getValue('editLocations')),
             userid: 2
         }
 
@@ -75,7 +75,7 @@ class Page extends React.Component {
                     <li key={index}>{value}</li>
                 )
             });
-            peopleList = <div className="people"><ul><h4>People:</h4>{people}</ul></div>
+            peopleList = <div className="sub-list first-list people"><ul><h4>People:</h4>{people}</ul></div>
         }
 
         if ( details.locations !== null ) {
@@ -84,12 +84,12 @@ class Page extends React.Component {
                     <li key={index}>{value}</li>
                 )
             });
-            locationsList = <div className="locations"><ul><h4>Locations:</h4>{locations}</ul></div>
+            locationsList = <div className="sub-list second-list locations"><ul><h4>Locations:</h4>{locations}</ul></div>
         }
 
         return (
-            <div className="page">
-                <div className="date"><h2>{dateformat(details.date, 'mmmm dS yyyy')}</h2></div>
+            <div className="list-item page">
+                <div className="title date"><h2>{dateformat(details.date, 'mmmm dS yyyy')}</h2></div>
                 <div className="left">
                     <div className="text">{details.text}</div>
                 </div>
@@ -99,7 +99,7 @@ class Page extends React.Component {
                     {locationsList}
                 </div>
                 <div className="info-end" style={{clear: 'both'}}></div>
-                <button onClick={this.edit}>Edit</button>
+                <button className="edit" onClick={this.edit}>Edit</button>
             </div>
         )
     }
@@ -108,41 +108,41 @@ class Page extends React.Component {
         const { details } = this.props;
 
         return (
-            <div className="page">
-                <div className="date"><h2>{dateformat(details.date, 'mmmm dS yyyy')}</h2></div>
+            <div className="list-item page">
+                <div className="title date"><h2>{dateformat(details.date, 'mmmm dS yyyy')}</h2></div>
                 <form>
                     <label>Text:</label>
                     <textarea
-                        id="text"
+                        id="editText"
                         className="text-field"
                         placeholder="Today I ..."
                         defaultValue={details.text}
                         onChange={this.handleChange}
                         type="text"
-                        name="text"
+                        name="editText"
                     />
                     <label>People:</label>
                     <input
-                        id="people"
+                        id="editPeople"
                         className="text-field"
                         placeholder="Bob, Chris, ..."
                         defaultValue={details.people}
                         onChange={this.handleChange}
                         type="text"
-                        name="people"
+                        name="editPeople"
                     />
                     <label>Locations:</label>
                     <input
-                        id="locations"
+                        id="editLocations"
                         className="text-field"
                         placeholder="Cafe Bax, Cafe Lennep, ..."
                         defaultValue={details.locations}
                         onChange={this.handleChange}
                         type="text"
-                        name="locations"
+                        name="editLocations"
                     />
                 </form>
-                <button onClick={this.save}>Save</button>
+                <button className="save" onClick={this.save}>Save</button>
             </div>
         )
     }

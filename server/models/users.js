@@ -19,6 +19,16 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'userid',
             as: 'pages'
         });
+
+        User.hasMany(models.People, {
+            foreignKey: 'userid',
+            as: 'people'
+        });
+
+        User.hasMany(models.Locations, {
+            foreignKey: 'userid',
+            as: 'locations'
+        });
     };
 
     return User;

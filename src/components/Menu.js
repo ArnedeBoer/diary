@@ -5,8 +5,9 @@ class Menu extends React.Component {
         return (
             <div id="menu">
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/addPage">Add Page</a></li>
+                    <li><a href="/">Diary</a></li>
+                    <li><a href="/people">People</a></li>
+                    <li><a href="/locations">Locations</a></li>
                     <li><a href="/login">Logout</a></li>
                 </ul>
             </div>

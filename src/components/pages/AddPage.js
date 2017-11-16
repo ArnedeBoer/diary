@@ -1,17 +1,17 @@
 import React from 'react';
-import { getValue, emptyStringToNull, processArray } from './../helpers.js';
+import { getValue, emptyStringToNull, processArray } from './../../helpers.js';
 
-class Filters extends React.Component {
+class AddPage extends React.Component {
     constructor() {
         super();
 
         this.handleChange = this.handleChange.bind(this);
 
         this.state = {
-            date: '',
-            text: '',
-            people: '',
-            locations: ''
+            addDate: '',
+            addText: '',
+            addPeople: '',
+            addLocations: ''
         }
     }
 
@@ -23,10 +23,10 @@ class Filters extends React.Component {
         event.preventDefault();
 
         const page = {
-            date: emptyStringToNull(getValue('date')),
-            text: emptyStringToNull(getValue('text')),
-            people: processArray(getValue('people')),
-            locations: processArray(getValue('locations'))
+            date: emptyStringToNull(getValue('addDate')),
+            text: emptyStringToNull(getValue('addText')),
+            people: processArray(getValue('addPeople')),
+            locations: processArray(getValue('addLocations'))
         }
 
         const userid = '2';
@@ -40,55 +40,55 @@ class Filters extends React.Component {
         })
         .then(res => {
             if (res.status === 201) {
-                document.getElementById('addPage').reset();
+                document.getElementById('form-addPage').reset();
             }
         });
     };
 
     render() {
-        const { date, text } = this.state;
-        const dateIsValid = date.length > 0;
-        const textIsValid = text.length > 0;
+        const { addDate, addText } = this.state;
+        const dateIsValid = addDate.length > 0;
+        const textIsValid = addText.length > 0;
         const formIsValid = dateIsValid && textIsValid;
 
         return (
-            <div className="addPage">
+            <div id="addPage" className="add">
                 <h1>Add page</h1>
-                <form id="addPage" onSubmit={this.handleSubmit}>
+                <form id="form-addPage" onSubmit={this.handleSubmit}>
                     <label>Date:</label>
                     <input
-                        id="date"
+                        id="addDate"
                         className="text-field"
                         onChange={this.handleChange}
                         type="date"
-                        name="date"
+                        name="addDate"
                     />
                     <label>Text:</label>
                     <textarea
-                        id="text"
+                        id="addText"
                         className="text-field"
                         placeholder="Today I ..."
                         onChange={this.handleChange}
                         type="text"
-                        name="text"
+                        name="addText"
                     />
                     <label>People:</label>
                     <input
-                        id="people"
+                        id="addPeople"
                         className="text-field"
                         placeholder="Bob, Chris, ..."
                         onChange={this.handleChange}
                         type="text"
-                        name="people"
+                        name="addPeople"
                     />
                     <label>Locations:</label>
                     <input
-                        id="locations"
+                        id="addLocations"
                         className="text-field"
                         placeholder="Cafe Bax, Cafe Lennep, ..."
                         onChange={this.handleChange}
                         type="text"
-                        name="locations"
+                        name="addLocations"
                     />
                     <input
                         id="submit"
@@ -101,4 +101,4 @@ class Filters extends React.Component {
     }
 }
 
-export default Filters;
+export default AddPage;
