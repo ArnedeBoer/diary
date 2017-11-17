@@ -1,6 +1,6 @@
 import React from 'react';
 import Location from './Location';
-import AddLocations from './AddLocations';
+import Add from './../Add';
 import Filters from './../Filters';
 
 class Locations extends React.Component {
@@ -27,6 +27,22 @@ class Locations extends React.Component {
             }
         ];
 
+        const fields = [
+            {
+                name: 'addname',
+                title: 'Name',
+                placeholder: 'Cafe Bax',
+                type: 'text',
+                required: true
+            },
+            {
+                name: 'addtext',
+                title: 'Description',
+                placeholder: 'This location is ...',
+                type: 'textarea'
+            }
+        ];
+
         return (
             <div id="locations">
                 <div id="left-column">
@@ -43,7 +59,10 @@ class Locations extends React.Component {
                     </div>
                 </div>
                 <div id="right-column">
-                    <AddLocations />
+                    <Add
+                        page="locations"
+                        fields={fields}
+                    />
                 </div>
             </div>
         )

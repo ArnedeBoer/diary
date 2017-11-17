@@ -1,6 +1,6 @@
 import React from 'react';
 import Person from './Person';
-import AddPeople from './AddPeople';
+import Add from './../Add';
 import Filters from './../Filters';
 
 class People extends React.Component {
@@ -27,6 +27,22 @@ class People extends React.Component {
             }
         ];
 
+        const fields = [
+            {
+                name: 'addname',
+                title: 'Name',
+                placeholder: 'Bob',
+                type: 'text',
+                required: true
+            },
+            {
+                name: 'addtext',
+                title: 'Description',
+                placeholder: 'This person is ...',
+                type: 'textarea'
+            }
+        ];
+
         return (
             <div id="people">
                 <div id="left-column">
@@ -43,7 +59,10 @@ class People extends React.Component {
                     </div>
                 </div>
                 <div id="right-column">
-                    <AddPeople />
+                    <Add
+                        page="people"
+                        fields={fields}
+                    />
                 </div>
             </div>
         )

@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from './Page';
-import AddPage from './AddPage';
+import Add from './../Add';
 import Filters from './../Filters';
 
 class Pages extends React.Component {
@@ -44,6 +44,34 @@ class Pages extends React.Component {
             }
         ];
 
+        const fields = [
+            {
+                name: 'adddate',
+                title: 'Date',
+                type: 'date',
+                required: true
+            },
+            {
+                name: 'addtext',
+                title: 'Description',
+                placeholder: 'Dear diary...',
+                type: 'textarea',
+                required: true
+            },
+            {
+                name: 'addpeople',
+                title: 'People',
+                type: 'select',
+                placeholder: 'Bob, Chris, ...'
+            },
+            {
+                name: 'addlocations',
+                title: 'Locations',
+                type: 'select',
+                placeholder: 'Cafe Bax, Cafe Lennep, ...'
+            }
+        ];
+
         return (
             <div id="pages">
                 <div id="left-column">
@@ -60,7 +88,10 @@ class Pages extends React.Component {
                     </div>
                 </div>
                 <div id="right-column">
-                    <AddPage />
+                    <Add
+                        page="page"
+                        fields={fields}
+                    />
                 </div>
             </div>
         )

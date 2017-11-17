@@ -9,7 +9,7 @@ class Filters extends React.Component {
         const filters = {};
 
         this.props.filters.forEach(filter => {
-            return filters[filter.name] = filter.type === 'select' ? processArray(getValue(filter.name)) : emptyStringToNull(getValue(filter.name));    
+            return filters[filter.name] = filter.type === 'select' ? processArray(getValue(filter.name)) : emptyStringToNull(getValue(filter.name));
         });
 
         fetch(`/api/${this.props.page}/filter`, {
