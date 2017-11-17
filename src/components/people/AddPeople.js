@@ -25,7 +25,7 @@ class AddPeople extends React.Component {
             text: emptyStringToNull(getValue('addText'))
         }
 
-        const userid = '2';
+        const userid = '1';
 
         fetch(`/api/people/create/${userid}`, {
             method: "POST",

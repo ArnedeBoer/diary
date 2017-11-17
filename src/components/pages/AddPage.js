@@ -29,7 +29,7 @@ class AddPage extends React.Component {
             locations: processArray(getValue('addLocations'))
         }
 
-        const userid = '2';
+        const userid = '1';
 
         fetch(`/api/page/create/${userid}`, {
             method: "POST",

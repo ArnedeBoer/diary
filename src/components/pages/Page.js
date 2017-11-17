@@ -38,7 +38,7 @@ class Page extends React.Component {
             text: emptyStringToNull(getValue('editText')),
             people: processArray(getValue('editPeople')),
             locations: processArray(getValue('editLocations')),
-            userid: 2
+            userid: 1
         }
 
         fetch('/api/page/edit', {

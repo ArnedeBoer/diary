@@ -30,7 +30,7 @@ class Location extends React.Component {
             id: details.id,
             name: emptyStringToNull(getValue('editName')),
             text: emptyStringToNull(getValue('editText')),
-            userid: 2
+            userid: 1
         }
 
         fetch('/api/people/edit', {
