@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: true
         }
+    }, {
+        timestamps: false
     });
 
     Page.associate = (models) => {

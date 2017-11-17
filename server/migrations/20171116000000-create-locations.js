@@ -15,14 +15,6 @@ module.exports = {
                 type: Sequelize.TEXT,
                 allowNull: true
             },
-            createdAt: {
-                allowNull: false,
-                type: Sequelize.DATE
-            },
-            updatedAt: {
-                allowNull: false,
-                type: Sequelize.DATE
-            },
             userid: {
                 type: Sequelize.INTEGER,
                 onDelete: 'CASCADE',
@@ -32,6 +24,8 @@ module.exports = {
                     as: 'userid'
                 }
             }
+        }, {
+            timestamps: false
         }),
     down: (queryInterface /*, Sequelize */) => queryInterface.dropTable('Locations')
 };
