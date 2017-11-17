@@ -47,7 +47,7 @@ class Location extends React.Component {
                 const locations = this.props.locations;
                 
                 locations[this.props.index] = location;
-                this.props.setLocations(locations);
+                this.props.updateState(locations);
             }
         });
     }

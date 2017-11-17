@@ -47,7 +47,7 @@ class Location extends React.Component {
                 const people = this.props.people;
                 
                 people[this.props.index] = person;
-                this.props.setPeople(people);
+                this.props.updateState(people);
             }
         });
     }

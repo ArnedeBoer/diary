@@ -55,7 +55,7 @@ class Page extends React.Component {
                 const pages = this.props.pages;
                 
                 pages[this.props.index] = page;
-                this.props.setPages(pages);
+                this.props.updateState(pages);
             }
         });
     }

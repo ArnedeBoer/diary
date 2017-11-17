@@ -1,34 +1,44 @@
 import React from 'react';
 import Person from './Person';
 import AddPeople from './AddPeople';
-import PeopleFilters from './PeopleFilters';
+import Filters from './../Filters';
 
 class People extends React.Component {
     constructor() {
         super();
 
-        this.setPeople = this.setPeople.bind(this);
+        this.updateState = this.updateState.bind(this);
 
         this.state = {
             people: []
         };
     }
 
-    setPeople(people) {
+    updateState(people) {
         this.setState({ people });
     }
 
     render() {
+        const filters = [
+            {
+                name: 'name',
+                title: 'Person',
+                type: 'text'
+            }
+        ];
+
         return (
             <div id="people">
                 <div id="left-column">
-                    <PeopleFilters
-                    setPeople={this.setPeople}
+                    <Filters
+                        page="people"
+                        filters={filters}
+                        updateState={this.updateState}
                     />
                     <div id="people-list">
                     {
                         this.state.people
-                            .map((people, index) => <Person key={index} index={index} details={this.state.people[index]} people={this.state.people} setPeople={this.setPeople}/>)
+                            .map((people, index) => <Person key={index} index={index} details={this.state.people[index]} people={this.state.people} updateState={this.updateState}/>)
                     }
                     </div>
                 </div>

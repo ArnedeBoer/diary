@@ -1,34 +1,44 @@
 import React from 'react';
 import Location from './Location';
 import AddLocations from './AddLocations';
-import LocationFilters from './LocationFilters';
+import Filters from './../Filters';
 
 class Locations extends React.Component {
     constructor() {
         super();
 
-        this.setLocations = this.setLocations.bind(this);
+        this.updateState = this.updateState.bind(this);
 
         this.state = {
             locations: []
         };
     }
 
-    setLocations(locations) {
+    updateState(locations) {
         this.setState({ locations });
     }
 
     render() {
+        const filters = [
+            {
+                name: 'name',
+                title: 'Location',
+                type: 'text'
+            }
+        ];
+
         return (
             <div id="locations">
                 <div id="left-column">
-                    <LocationFilters
-                    setLocations={this.setLocations}
+                    <Filters
+                        page="locations"
+                        filters={filters}
+                        updateState={this.updateState}
                     />
                     <div id="locations-list">
                     {
                         this.state.locations
-                            .map((location, index) => <Location key={index} index={index} details={this.state.locations[index]} locations={this.state.locations} setLocations={this.setLocations}/>)
+                            .map((location, index) => <Location key={index} index={index} details={this.state.locations[index]} locations={this.state.locations} updateState={this.updateState}/>)
                     }
                     </div>
                 </div>
