@@ -3,7 +3,7 @@ import dateformat from 'dateformat';
 import { getValue, emptyStringToNull, processArray } from './../../helpers.js';
 
 class Page extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
 
         this.edit = this.edit.bind(this);
@@ -12,22 +12,20 @@ class Page extends React.Component {
 
         this.state = {
             editing: false,
-            date: '',
-            text: '',
-            people: '',
-            locations: ''
+            date: props.details.date,
+            text: props.details.text,
+            people: props.details.people,
+            locations: props.details.locations
         };
     }
 
     edit() {
-        const { details } = this.props;
-
         this.setState({
             editing: true,
-            date: details.date,
-            text: details.text,
-            people: details.people,
-            locations: details.locations
+            date: this.state.date,
+            text: this.state.text,
+            people: this.state.people,
+            locations: this.state.locations
         });
     };
 
@@ -65,12 +63,11 @@ class Page extends React.Component {
     }
 
     renderNormal() {
-        const { details } = this.props;
         let peopleList;
         let locationsList;
 
-        if ( details.people !== null ) {
-            const people = details.people.map((value, index) => {
+        if ( this.state.people !== null ) {
+            const people = this.state.people.map((value, index) => {
                 return (
                     <li key={index}>{value}</li>
                 )
@@ -78,8 +75,8 @@ class Page extends React.Component {
             peopleList = <div className="sub-list first-list people"><ul><h4>People:</h4>{people}</ul></div>
         }
 
-        if ( details.locations !== null ) {
-            const locations = details.locations.map((value, index) => {
+        if ( this.state.locations !== null ) {
+            const locations = this.state.locations.map((value, index) => {
                 return (
                     <li key={index}>{value}</li>
                 )
@@ -89,9 +86,9 @@ class Page extends React.Component {
 
         return (
             <div className="list-item page">
-                <div className="title date"><h2>{dateformat(details.date, 'mmmm dS yyyy')}</h2></div>
+                <div className="title date"><h2>{dateformat(this.state.date, 'mmmm dS yyyy')}</h2></div>
                 <div className="left">
-                    <div className="text">{details.text}</div>
+                    <div className="text">{this.state.text}</div>
                 </div>
 
                 <div className="right">
@@ -105,18 +102,16 @@ class Page extends React.Component {
     }
 
     renderForm() {
-        const { details } = this.props;
-
         return (
             <div className="list-item page">
-                <div className="title date"><h2>{dateformat(details.date, 'mmmm dS yyyy')}</h2></div>
+                <div className="title date"><h2>{dateformat(this.state.date, 'mmmm dS yyyy')}</h2></div>
                 <form>
                     <label>Text:</label>
                     <textarea
                         id="editText"
                         className="text-field"
                         placeholder="Today I ..."
-                        defaultValue={details.text}
+                        defaultValue={this.state.text}
                         onChange={this.handleChange}
                         type="text"
                         name="editText"
@@ -126,7 +121,7 @@ class Page extends React.Component {
                         id="editPeople"
                         className="text-field"
                         placeholder="Bob, Chris, ..."
-                        defaultValue={details.people}
+                        defaultValue={this.state.people}
                         onChange={this.handleChange}
                         type="text"
                         name="editPeople"
@@ -136,7 +131,7 @@ class Page extends React.Component {
                         id="editLocations"
                         className="text-field"
                         placeholder="Cafe Bax, Cafe Lennep, ..."
-                        defaultValue={details.locations}
+                        defaultValue={this.state.locations}
                         onChange={this.handleChange}
                         type="text"
                         name="editLocations"

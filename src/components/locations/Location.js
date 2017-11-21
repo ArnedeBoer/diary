@@ -74,7 +74,7 @@ class Location extends React.Component {
         const { details } = this.props;
 
         return (
-            <div className="location">
+            <div className="list-item location">
                 <form>
                     <label>Name:</label>
                     <input
