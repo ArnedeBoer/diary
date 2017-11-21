@@ -1,5 +1,4 @@
 import React from 'react';
-import {  getValue, processArray, emptyStringToNull } from './../helpers.js';
 import AddField from './AddField';
 
 class Add extends React.Component {
@@ -7,18 +6,26 @@ class Add extends React.Component {
         super();
 
         this.handleChange = this.handleChange.bind(this);
+        this.updateSelectState = this.updateSelectState.bind(this);
 
         const states = {};
 
         props.fields.forEach(field => {
-            return states[field.name] = '';    
+            return states[field.name] = null;    
         });
 
         this.state = states;
     }
 
     handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        const newValue = e.target.value === '' ? null : e.target.value;
+        this.setState({ [e.target.name]: newValue });
+    }
+
+    updateSelectState(field, value) {
+        const values = value.map(val => val.name);
+
+        this.setState({ [field]: values})
     }
 
     handleSubmit(event) {
@@ -27,7 +34,7 @@ class Add extends React.Component {
         const data = {};
 
         this.props.fields.forEach(field => {
-            return data[field.name.replace('add', '')] = field.type === 'select' ? processArray(getValue(field.name)) : emptyStringToNull(getValue(field.name));  
+            return data[field.name.replace('add', '')] = this.state[field.name];  
         });
 
         const userid = '1';
@@ -49,7 +56,7 @@ class Add extends React.Component {
     render() {
         const requiredFields = this.props.fields.filter(field => field.required);
         const formIsValid = requiredFields.every(field => {
-            return this.state[field.name] !== '';
+            return this.state[field.name] !== null;
         });
 
         return (
@@ -58,7 +65,7 @@ class Add extends React.Component {
                 <form id="add-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {
                         this.props.fields
-                            .map((field, index) => <AddField key={index} index={index} field={field} handleChange={this.handleChange}/>)
+                            .map((field, index) => <AddField key={index} index={index} field={field} page={this.props.page} handleChange={this.handleChange} updateSelectState={this.updateSelectState}/>)
                     }
                     <input
                         id="submit"

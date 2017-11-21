@@ -36,6 +36,7 @@
     "react": "15.3.2",
     "react-dom": "15.3.2",
     "react-router": "4.0.0-alpha.4",
+    "react-select": "^1.0.0-rc.10",
     "sequelize": "^4.22.1"
   },
   "devDependencies": {

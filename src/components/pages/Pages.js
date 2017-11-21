@@ -62,13 +62,15 @@ class Pages extends React.Component {
                 name: 'addpeople',
                 title: 'People',
                 type: 'select',
-                placeholder: 'Bob, Chris, ...'
+                placeholder: 'Bob, Chris, ...',
+                list: 'people-list'
             },
             {
                 name: 'addlocations',
                 title: 'Locations',
                 type: 'select',
-                placeholder: 'Cafe Bax, Cafe Lennep, ...'
+                placeholder: 'Cafe Bax, Cafe Lennep, ...',
+                list: 'location-list'
             }
         ];
 

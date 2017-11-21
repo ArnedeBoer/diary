@@ -9,19 +9,16 @@
 
     .filter {
         display: inline-block;
+        margin: 0px 20px 15px 0px;
         
-        label, input {
+        label {
             display: block;
-            margin: 20px;
+            min-width: 200px;
         }
     }
 
-    label {
-        margin-bottom: 10px;
-    }
-
     #submit {
-        margin: 0px 20px;
+        margin-top: 5px;
         display: block;
     }
 }

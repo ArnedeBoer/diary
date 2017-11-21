@@ -11,8 +11,8 @@
             display: block;
         }
 
-        input, textarea {
-            margin-bottom: 20px;
+        .add-field {
+            margin-bottom: 15px;
         }
 
         textarea {
@@ -24,5 +24,8 @@
             width: 100%;
         }
     }
-}
 
+    h1 {
+        margin: 0px auto;
+    }
+}
