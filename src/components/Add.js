@@ -34,7 +34,7 @@ class Add extends React.Component {
         const data = {};
 
         this.props.fields.forEach(field => {
-            return data[field.name.replace('add', '')] = this.state[field.name];  
+            return data[field.name] = this.state[field.name];  
         });
 
         const userid = '1';

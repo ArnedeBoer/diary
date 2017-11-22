@@ -14,7 +14,7 @@ class Item extends React.Component {
             editing: false
         };
 
-        if (props.page === 'page') {
+        if (props.page === 'pages') {
             states.date = props.details.date;
             states.text = props.details.text;
             states.people = props.details.people;
@@ -28,7 +28,7 @@ class Item extends React.Component {
     }
 
     edit() {
-        if (this.props.page === 'page') {
+        if (this.props.page === 'pages') {
             this.setState({
                 editing: true,
                 date: this.state.date,
@@ -52,7 +52,7 @@ class Item extends React.Component {
             userid: 1
         };
 
-        if (this.props.page === 'page') {
+        if (this.props.page === 'pages') {
             item.date = emptyStringToNull(getValue('date'));
             item.text = emptyStringToNull(getValue('text'));
             item.people = processArray(getValue('people'));
@@ -223,7 +223,7 @@ class Item extends React.Component {
     }
 
     render() {
-        if (this.props.page === 'page') {
+        if (this.props.page === 'pages') {
             return this.state.editing ? this.renderPageForm() : this.renderPageNormal();
         }
 

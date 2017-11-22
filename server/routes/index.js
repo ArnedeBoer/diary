@@ -9,11 +9,11 @@ module.exports = app => {
     app.get('/api/user/find/:username', usersController.findByUsername);
     app.post('/api/user/create', usersController.create);
 
-    app.get('/api/page/all', pagesController.list);
-    app.post('/api/page/filter', pagesController.filter);
-    app.get('/api/page/:pageid', pagesController.retrieve);
-    app.post('/api/page/create/:userid', pagesController.create);
-    app.post('/api/page/edit', pagesController.edit);
+    app.get('/api/pages/all', pagesController.list);
+    app.post('/api/pages/filter', pagesController.filter);
+    app.get('/api/pages/:pageid', pagesController.retrieve);
+    app.post('/api/pages/create/:userid', pagesController.create);
+    app.post('/api/pages/edit', pagesController.edit);
 
     app.post('/api/people/create/:userid', peopleController.create);
     app.post('/api/people/filter', peopleController.filter);

@@ -27,7 +27,7 @@ class AddField extends React.Component {
             return Promise.resolve({ options: null });
         }
 
-        const filterType = this.props.field.name.replace('add', '');
+        const filterType = this.props.field.name;
 
         return fetch(`/api/${filterType}/filter/`, {
             method: "POST",

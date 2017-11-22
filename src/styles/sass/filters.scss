@@ -9,11 +9,14 @@
 
     .filter {
         display: inline-block;
-        margin: 0px 20px 15px 0px;
+        margin: 0px 10px 15px 0px;
         
         label {
             display: block;
-            min-width: 200px;
+        }
+
+        .Select {
+            min-width: 150px;
         }
     }
 

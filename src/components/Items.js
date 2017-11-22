@@ -98,13 +98,7 @@ class Items extends React.Component {
         const location = this.props.location.pathname.replace('/', '');
         const fields = location === '' ? pageFields : supportFields;
         const filters = location === '' ? pageFilters : supportFilters;
-        const pageName = location === '' ? 'page' : location;
-
-        const addFields = fields.map(field => {
-            field.name = `add${field.name}`
-
-            return field;
-        })
+        const pageName = location === '' ? 'pages' : location;
 
         return (
             <div id="pages">
@@ -133,7 +127,7 @@ class Items extends React.Component {
                 <div id="right-column">
                     <Add
                         page={pageName}
-                        fields={addFields}
+                        fields={fields}
                     />
                 </div>
             </div>
