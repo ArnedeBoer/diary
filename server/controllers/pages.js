@@ -88,6 +88,7 @@ module.exports = {
         return Page
             .update(
                 {
+                    date: req.body.date,
                     text: req.body.text,
                     people: req.body.people,
                     locations: req.body.locations
