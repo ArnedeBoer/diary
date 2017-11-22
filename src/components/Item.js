@@ -1,6 +1,5 @@
 import React from 'react';
 import dateformat from 'dateformat';
-import { getValue, emptyStringToNull, processArray } from './../helpers.js';
 
 class Item extends React.Component {
     constructor(props) {
@@ -53,13 +52,13 @@ class Item extends React.Component {
         };
 
         if (this.props.page === 'pages') {
-            item.date = emptyStringToNull(getValue('date'));
-            item.text = emptyStringToNull(getValue('text'));
-            item.people = processArray(getValue('people'));
-            item.locations = processArray(getValue('locations'));
+            item.date = this.state.date;
+            item.text = this.state.text;
+            item.people = this.state.people;
+            item.locations = this.state.locations;
         } else {
-            item.name = emptyStringToNull(getValue('name'));
-            item.text = emptyStringToNull(getValue('text'));
+            item.name = this.state.name;
+            item.text = this.state.text;
         }
 
         console.log(item);
