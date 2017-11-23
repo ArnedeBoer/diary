@@ -10,7 +10,7 @@ class Input extends React.Component {
 
         let defaultValues = [];
 
-        if (props.page === 'pages') {
+        if (props.page === 'pages' && props.field.defaultValue !== undefined) {
             defaultValues = props.field.defaultValue.map(name => {
                 return {
                     name: name
