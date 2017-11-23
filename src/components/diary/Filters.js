@@ -54,7 +54,7 @@ class Filters extends React.Component {
                     {
                         this.props.fields
                             .map((field, index) => {
-                                return this.props.renderType(field, index, this.handleChange, this.updateSelectState);
+                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState);
                             })
                     }
                     <input
@@ -66,6 +66,4 @@ class Filters extends React.Component {
         )
     }
 }
-// better to loop sub elements because of nested functions??
-// now fixed for handleChange, but now must do updateSelectState as well :/
 export default Filters;
