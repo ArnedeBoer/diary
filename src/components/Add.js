@@ -1,5 +1,4 @@
 import React from 'react';
-import AddField from './AddField';
 
 class Add extends React.Component {
     constructor(props) {
@@ -65,7 +64,9 @@ class Add extends React.Component {
                 <form id="add-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {
                         this.props.fields
-                            .map((field, index) => <AddField key={index} index={index} field={field} page={this.props.page} handleChange={this.handleChange} updateSelectState={this.updateSelectState}/>)
+                            .map((field, index) => {
+                                return this.props.renderType(field, index, this.handleChange, this.updateSelectState);
+                            })
                     }
                     <input
                         id="submit"

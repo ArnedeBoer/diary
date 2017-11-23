@@ -1,5 +1,4 @@
 import React from 'react';
-import Filter from './Filter';
 
 class Filters extends React.Component {
     constructor(props) {
@@ -10,8 +9,8 @@ class Filters extends React.Component {
 
         const states = {};
 
-        props.filters.forEach(filter => {
-            return states[filter.name] = null;    
+        props.fields.forEach(field => {
+            return states[field.name] = null;    
         });
 
         this.state = states;
@@ -22,24 +21,24 @@ class Filters extends React.Component {
         this.setState({ [e.target.name]: newValue });
     }
 
-    updateSelectState(filter, value) {
+    updateSelectState(field, value) {
         const values = value.map(val => val.name);
 
-        this.setState({ [filter]: values})
+        this.setState({ [field]: values})
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        const filters = {};
+        const fields = {};
 
-        this.props.filters.forEach(filter => {
-            return filters[filter.name.replace('add', '')] = this.state[filter.name];  
+        this.props.fields.forEach(field => {
+            return fields[field.name.replace('add', '')] = this.state[field.name];  
         });
 
         fetch(`/api/${this.props.page}/filter`, {
             method: "POST",
-            body: JSON.stringify(filters),
+            body: JSON.stringify(fields),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -51,21 +50,22 @@ class Filters extends React.Component {
     render() {
         return (
             <div id="filters">
-                <div className="container">
-                    <form id="filter-form" onSubmit={(e) => this.handleSubmit(e)}>
-                        {
-                            this.props.filters
-                                .map((filter, index) => <Filter key={index} index={index} filter={filter} page={this.props.page} handleChange={this.handleChange} updateSelectState={this.updateSelectState}/>)
-                        }
-                        <input
-                            id="submit"
-                            type="submit"
-                        />
-                    </form>
-                </div>
+                <form id="filter-form" onSubmit={(e) => this.handleSubmit(e)}>
+                    {
+                        this.props.fields
+                            .map((field, index) => {
+                                return this.props.renderType(field, index, this.handleChange, this.updateSelectState);
+                            })
+                    }
+                    <input
+                        id="submit"
+                        type="submit"
+                    />
+                </form>
             </div>
         )
     }
 }
-
+// better to loop sub elements because of nested functions??
+// now fixed for handleChange, but now must do updateSelectState as well :/
 export default Filters;

@@ -2,6 +2,9 @@ import React from 'react';
 import Item from './Item';
 import Add from './Add';
 import Filters from './Filters';
+import Input from './fields/Input';
+import Textarea from './fields/Textarea';
+import Select from './fields/Select';
 
 class Items extends React.Component {
     constructor() {
@@ -16,6 +19,43 @@ class Items extends React.Component {
 
     updateState(items) {
         this.setState({ items });
+    }
+
+    renderType(field, index, page, handleChange, updateSelectState) {
+        switch(field.type) {
+            case 'textarea':
+            return (
+                <Textarea
+                    key={index}
+                    field={field}
+                    page={page}
+                    updateSelectState={updateSelectState}
+                    handleChange={handleChange}
+                />
+            );
+
+            case 'select':
+            return (
+                <Select
+                    key={index}
+                    field={field}
+                    page={page}
+                    updateSelectState={updateSelectState}
+                    handleChange={handleChange}
+                />
+            );
+
+            default:
+            return (
+                <Input
+                    key={index}
+                    field={field}
+                    page={page}
+                    updateSelectState={updateSelectState}
+                    handleChange={handleChange}
+                />
+            );
+        }
     }
 
     render() {
@@ -105,29 +145,33 @@ class Items extends React.Component {
                 <div id="left-column">
                     <Filters
                         page={pageName}
-                        filters={filters}
+                        fields={filters}
                         updateState={this.updateState}
+                        renderType={this.renderType}
                     />
                     <div id="page-list">
-                    {
-                        this.state.items
-                            .map((page, index) =>
-                                <Item
-                                    page={pageName}
-                                    key={index}
-                                    index={index}
-                                    details={this.state.items[index]}
-                                    items={this.state.items}
-                                    updateState={this.updateState}
-                                />
-                            )
-                    }
+                        {
+                            this.state.items
+                                .map((page, index) =>
+                                    <Item
+                                        page={pageName}
+                                        key={index}
+                                        index={index}
+                                        details={page}
+                                        fields={fields}
+                                        items={this.state.items}
+                                        updateState={this.updateState}
+                                        renderType={this.renderType}
+                                    />
+                                )
+                        }
                     </div>
                 </div>
                 <div id="right-column">
                     <Add
                         page={pageName}
                         fields={fields}
+                        renderType={this.renderType}
                     />
                 </div>
             </div>
