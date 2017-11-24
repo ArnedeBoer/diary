@@ -19,17 +19,13 @@ class Input extends React.Component {
         }
 
         this.state = {
-            options: [],
             value: defaultValues
         }
     }
 
     onChange(value) {
         this.props.updateSelectState(this.props.field.name, value);
-
-        this.setState({
-            value: value,
-        });
+        this.setState({ value });
     }
 
     getOptions(input) {
@@ -37,7 +33,7 @@ class Input extends React.Component {
             return Promise.resolve({ options: null });
         }
 
-        const fieldType = this.props.field.name.replace('add', '');
+        const fieldType = this.props.field.name;
 
         return fetch(`/api/${fieldType}/filter/`, {
             method: "POST",
@@ -69,6 +65,7 @@ class Input extends React.Component {
                     labelKey="name"
                     multi={true}
                     name="form-field-name"
+                    ignoreCase={false}
                 />
             </div>
         )
