@@ -1,13 +1,19 @@
 import React from 'react';
 
 class Menu extends React.Component {
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     render() {
         return (
             <div id="menu">
                 <ul>
-                    <li><a href="/pages">Diary</a></li>
-                    <li><a href="/people">People</a></li>
-                    <li><a href="/locations">Locations</a></li>
+                    {
+                        this.props.pageNames.map((pageName, index) => {
+                            return <li key={index}><a href={`/${pageName}`}>{this.capitalizeFirstLetter(pageName)}</a></li>
+                        })
+                    }
                     <li><a href="/login">Logout</a></li>
                 </ul>
             </div>

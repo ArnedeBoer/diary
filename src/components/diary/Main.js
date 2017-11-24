@@ -64,7 +64,9 @@ class Main extends React.Component {
 
         return (
             <div>
-                <Menu />
+                <Menu
+                    pageNames={this.props.pageNames}
+                />
                 <div id="left-column">
                     <Filters
                         page={pageName}

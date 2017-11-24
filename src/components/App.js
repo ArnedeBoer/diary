@@ -100,6 +100,10 @@ const pages = [
     }
 ];
 
+const pageNames = pages.map(page => {
+    return page.name;
+})
+
 class App extends React.Component {
     render() {
         return (
@@ -114,6 +118,7 @@ class App extends React.Component {
                             render={ props =>
                                 <Main
                                     {...props}
+                                    pageNames={pageNames}
                                     pageName={page.name}
                                     filters={page.filters}
                                     fields={page.fields}
