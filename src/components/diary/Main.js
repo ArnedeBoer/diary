@@ -80,7 +80,7 @@ class Main extends React.Component {
                                 .map((page, index) =>
                                     <Item
                                         page={pageName}
-                                        key={index}
+                                        key={page.id}
                                         index={index}
                                         details={page}
                                         fields={fields}
