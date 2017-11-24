@@ -10,13 +10,12 @@ class Input extends React.Component {
 
         let defaultValues = [];
 
-        if (props.page === 'pages' && props.field.defaultValue !== undefined) {
-            defaultValues = props.field.defaultValue.map(name => {
-                return {
-                    name: name
-                }
-            });
+        const defaultValue = props.field.defaultValue === null || props.field.defaultValue === undefined ? [] : props.field.defaultValue;
 
+        if (props.page === 'pages') {
+            defaultValues = defaultValue.map(name => {
+                return { name }
+            });
         }
 
         this.state = {
