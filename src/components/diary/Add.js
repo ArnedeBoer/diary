@@ -22,7 +22,7 @@ class Add extends React.Component {
     }
 
     updateSelectState(field, value) {
-        const values = value.map(val => val.name);
+        const values = value.length === 0 ? null : value.map(val => val.name);
 
         this.setState({ [field]: values})
     }
