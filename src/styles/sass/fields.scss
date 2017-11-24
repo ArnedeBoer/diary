@@ -1,0 +1,23 @@
+#filters, .list-item, #add {
+    label, input, textarea, .Select {
+        display: block;
+        width: 100%;
+        min-width: 150px;
+    }
+
+    .field {
+        margin-bottom: 15px;
+    }
+
+    textarea {
+        height: 200px;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+
+    #submit {
+        width: 50px;
+    }
+}

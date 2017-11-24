@@ -1,27 +1,14 @@
 #filters {
-    margin-bottom: 30px;
-
+    
     #filter-form {
         margin: auto;
         display: block;
         width: 90%;
-    }
+        margin-bottom: 30px;
 
-    .field {
-        display: inline-block;
-        margin: 0px 10px 15px 0px;
-        
-        label {
-            display: block;
+        .field {
+            display: inline-block;
+            margin: 0px 10px 15px 0px;
         }
-
-        .Select {
-            min-width: 150px;
-        }
-    }
-
-    #submit {
-        margin-top: 5px;
-        display: block;
     }
 }

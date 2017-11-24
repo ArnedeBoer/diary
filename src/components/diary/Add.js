@@ -59,7 +59,7 @@ class Add extends React.Component {
         });
 
         return (
-            <div className="add">
+            <div id="add">
                 <h1>Add {this.props.page}</h1>
                 <form id="add-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {

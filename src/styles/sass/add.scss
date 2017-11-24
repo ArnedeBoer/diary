@@ -1,4 +1,4 @@
-.add {
+#add {
     float: right;
     width: 40%;
 
@@ -6,23 +6,6 @@
         margin: 30px auto;
         width: 80%;
         display: block;
-
-        label, input, textarea {
-            display: block;
-        }
-
-        .add-field {
-            margin-bottom: 15px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 250px;
-        }
-
-        .text-field {
-            width: 100%;
-        }
     }
 
     h1 {
