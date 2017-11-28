@@ -17,8 +17,8 @@ class Item extends React.Component {
         if (props.page === 'pages') {
             states.date = props.details.date;
             states.text = props.details.text;
-            states.people = props.details.people;
-            states.locations = props.details.locations;
+            states.people = props.details.People;
+            states.locations = props.details.Locations;
         } else {
             states.name = props.details.name;
             states.text = props.details.text;
@@ -86,19 +86,19 @@ class Item extends React.Component {
         let title = this.props.page === 'pages' ? dateformat(this.state.date, 'mmmm dS yyyy') : this.state.name;
 
         if ( this.props.page === 'pages' ) {
-            if ( this.state.people !== null ) {
+            if ( this.state.people.length !== 0 ) {
                 const people = this.state.people.map((value, index) => {
                     return (
-                        <li key={index}>{value}</li>
+                        <li key={index}>{value.name}</li>
                     )
                 });
                 peopleList = <div className="sub-list first-list people"><ul><h4>People:</h4>{people}</ul></div>
             }
 
-            if ( this.state.locations !== null ) {
+            if ( this.state.locations.length !== 0 ) {
                 const locations = this.state.locations.map((value, index) => {
                     return (
-                        <li key={index}>{value}</li>
+                        <li key={index}>{value.name}</li>
                     )
                 });
                 locationsList = <div className="sub-list second-list locations"><ul><h4>Locations:</h4>{locations}</ul></div>

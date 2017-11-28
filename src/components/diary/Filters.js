@@ -22,7 +22,7 @@ class Filters extends React.Component {
     }
 
     updateSelectState(field, value) {
-        const values = value.length === 0 ? null : value.map(val => val.name);
+        const values = value.length === 0 ? null : value.map(val => val.id);
 
         this.setState({ [field]: values})
     }
@@ -33,7 +33,7 @@ class Filters extends React.Component {
         const fields = {};
 
         this.props.fields.forEach(field => {
-            return fields[field.name.replace('add', '')] = this.state[field.name];  
+            return fields[field.name] = this.state[field.name];  
         });
 
         fetch(`/api/${this.props.page}/filter`, {
@@ -44,7 +44,9 @@ class Filters extends React.Component {
             }
         })
         .then(res => res.json())
-        .then(results => this.props.updateState(results));
+        .then(results => {
+            this.props.updateState(results)
+        });
     };
 
     render() {

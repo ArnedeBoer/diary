@@ -1,4 +1,8 @@
 const Page = require('../models').Page;
+const PagesPeople = require('../models').PagesPeople;
+const PagesLocations = require('../models').PagesLocations;
+const People = require('../models').People;
+const Locations = require('../models').Locations;
 const Op = require('sequelize').Op;
 const moment = require('moment');
 
@@ -44,7 +48,6 @@ module.exports = {
         const locations = req.body.locations;
         const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : null;
         const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : null;
-
         const filters = {};
 
         if (dateStart !== null && dateEnd !== null) {
@@ -62,23 +65,29 @@ module.exports = {
             };
         }
 
-        if (people !== null) {
-            filters.people = {
-                [Op.contains]: people
-            };
-        }
-
-        if (locations !== null) {
-            filters.locations = {
-                [Op.contains]: locations
-            };
-        }
-
         return Page
             .findAll({
                 where: filters,
                 order: [
                     ['date', 'DESC']
+                ],
+                include: [
+                    {
+                        model: People,
+                        where: {
+                            id: {
+                                [Op.eq]: 2
+                            }
+                        }
+                    },
+                    {
+                        model: Locations,
+                        where: {
+                            id: {
+                                [Op.eq]: 3
+                            }
+                        }
+                    }
                 ]
             })
             .then(pages => res.status(200).send(pages))
