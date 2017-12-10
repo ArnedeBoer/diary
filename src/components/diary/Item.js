@@ -1,5 +1,6 @@
 import React from 'react';
 import dateformat from 'dateformat';
+import { renderType } from './../../helpers';
 
 class Item extends React.Component {
     constructor(props) {
@@ -126,7 +127,7 @@ class Item extends React.Component {
                     {
                         editFields
                             .map((field, index) => {
-                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
+                                return renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
                     }
                 </form>

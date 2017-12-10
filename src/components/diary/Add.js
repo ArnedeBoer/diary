@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderType } from './../../helpers';
 
 class Add extends React.Component {
     constructor(props) {
@@ -66,7 +67,7 @@ class Add extends React.Component {
                     {
                         this.props.fields
                             .map((field, index) => {
-                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
+                                return renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
                     }
                     <input
