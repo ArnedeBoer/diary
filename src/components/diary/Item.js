@@ -14,15 +14,9 @@ class Item extends React.Component {
             editing: false
         };
 
-        if (props.page === 'pages') {
-            states.date = props.details.date;
-            states.text = props.details.text;
-            states.people = props.details.People;
-            states.locations = props.details.Locations;
-        } else {
-            states.name = props.details.name;
-            states.text = props.details.text;
-        }
+        props.fields.forEach(field => {
+            states[field.name] = props.details[field.name]; 
+        });
 
         this.state = states;
     }
@@ -33,7 +27,7 @@ class Item extends React.Component {
     }
 
     updateSelectState(field, value) {
-        const values = value.length === 0 ? null : value.map(val => val.name);
+        const values = value.length === 0 ? [] : value;
 
         this.setState({ [field]: values})
     }
@@ -51,15 +45,9 @@ class Item extends React.Component {
             userid: 1
         };
 
-        if (this.props.page === 'pages') {
-            item.date = this.state.date;
-            item.text = this.state.text;
-            item.people = this.state.people;
-            item.locations = this.state.locations;
-        } else {
-            item.name = this.state.name;
-            item.text = this.state.text;
-        }
+        this.props.fields.forEach(field => {
+            item[field.name] = this.state[field.name]; 
+        });
 
         fetch(`/api/${this.props.page}/edit`, {
             method: "POST",
@@ -87,18 +75,18 @@ class Item extends React.Component {
 
         if ( this.props.page === 'pages' ) {
             if ( this.state.people.length !== 0 ) {
-                const people = this.state.people.map((value, index) => {
+                const people = this.state.people.map(value => {
                     return (
-                        <li key={index}>{value.name}</li>
+                        <li key={value.id}>{value.name}</li>
                     )
                 });
                 peopleList = <div className="sub-list first-list people"><ul><h4>People:</h4>{people}</ul></div>
             }
 
             if ( this.state.locations.length !== 0 ) {
-                const locations = this.state.locations.map((value, index) => {
+                const locations = this.state.locations.map(value => {
                     return (
-                        <li key={index}>{value.name}</li>
+                        <li key={value.id}>{value.name}</li>
                     )
                 });
                 locationsList = <div className="sub-list second-list locations"><ul><h4>Locations:</h4>{locations}</ul></div>
@@ -124,16 +112,19 @@ class Item extends React.Component {
 
     renderForm(fields) {
         const { details } = this.props;
+        const editFields = fields.map(field => {
+            let editField = Object.assign({}, field);
+            
+            editField.defaultValue = field.type === 'date' ? dateformat(details.date, 'yyyy-mm-dd') : details[field.name];
 
-        fields.forEach((field, index) => {
-            return fields[index].defaultValue = field.type === 'date' ? dateformat(details.date, 'yyyy-mm-dd') : details[field.name];
+            return editField;
         });
 
         return (
             <div className="list-item person">
                 <form>
                     {
-                        this.props.fields
+                        editFields
                             .map((field, index) => {
                                 return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState);
                             })

@@ -20,12 +20,14 @@ module.exports = (sequelize, DataTypes) => {
 
         Page.belongsToMany(models.Locations, {
             through: models.PagesLocations,
-            foreignKey: 'pageid'
+            foreignKey: 'pageid',
+            as: 'locations'
         });
 
         Page.belongsToMany(models.People, {
             through: models.PagesPeople,
-            foreignKey: 'pageid'
+            foreignKey: 'pageid',
+            as: 'people'
         });
     };
 

@@ -10,7 +10,7 @@ class Add extends React.Component {
         const states = {};
 
         props.fields.forEach(field => {
-            return states[field.name] = null;    
+            states[field.name] = field.type === 'select' ? [] : null;    
         });
 
         this.state = states;
@@ -21,9 +21,7 @@ class Add extends React.Component {
         this.setState({ [e.target.name]: newValue });
     }
 
-    updateSelectState(field, value) {
-        const values = value.length === 0 ? null : value.map(val => val.name);
-
+    updateSelectState(field, values) {
         this.setState({ [field]: values})
     }
 
@@ -48,6 +46,9 @@ class Add extends React.Component {
         .then(res => {
             if (res.status === 201) {
                 document.getElementById('add-form').reset();
+                this.props.fields.forEach(field => {
+                    this.setState({[field.name]: field.type === 'select' ? [] : null});    
+                });
             }
         });
     };

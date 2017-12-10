@@ -1,22 +1,14 @@
 import React from 'react';
-import Select from 'react-select';
+import ReactSelect from 'react-select';
 
-class Input extends React.Component {
+class Select extends React.Component {
     constructor(props) {
         super();
 
         this.onChange = this.onChange.bind(this);
         this.getOptions = this.getOptions.bind(this);
 
-        let defaultValues = [];
-
-        const defaultValue = props.field.defaultValue === null || props.field.defaultValue === undefined ? [] : props.field.defaultValue;
-
-        if (props.page === 'pages') {
-            defaultValues = defaultValue.map(name => {
-                return { name }
-            });
-        }
+        const defaultValues = props.field.defaultValue === null || props.field.defaultValue === undefined ? [] : props.field.defaultValue;
 
         this.state = {
             value: defaultValues
@@ -50,7 +42,7 @@ class Input extends React.Component {
 
     render() {
         const { placeholder, title } = this.props.field;
-        const AsyncComponent = Select.AsyncCreatable;
+        const AsyncComponent = ReactSelect.Async;
 
         return (
             <div className="field">
@@ -65,11 +57,10 @@ class Input extends React.Component {
                     labelKey="name"
                     multi={true}
                     name="form-field-name"
-                    ignoreCase={false}
                 />
             </div>
         )
     }
 }
 
-export default Input;
+export default Select;
