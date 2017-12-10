@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Input extends React.Component {
+class Textarea extends React.Component {
     constructor() {
         super();
 
@@ -30,4 +30,4 @@ class Input extends React.Component {
     }
 }
 
-export default Input;
+export default Textarea;

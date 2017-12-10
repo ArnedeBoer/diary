@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'userid',
             onDelete: 'CASCADE'
         });
+
+        Locations.belongsToMany(models.Page, {
+            through: models.PagesLocations,
+            foreignKey: 'locationid'
+        });
     };
 
     return Locations;

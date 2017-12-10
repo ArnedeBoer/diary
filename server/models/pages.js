@@ -7,14 +7,6 @@ module.exports = (sequelize, DataTypes) => {
         text: {
             type: DataTypes.TEXT,
             allowNull: false
-        },
-        people: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: true
-        },
-        locations: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: true
         }
     }, {
         timestamps: false
@@ -24,6 +16,18 @@ module.exports = (sequelize, DataTypes) => {
         Page.belongsTo(models.User, {
             foreignKey: 'userid',
             onDelete: 'CASCADE'
+        });
+
+        Page.belongsToMany(models.Locations, {
+            through: models.PagesLocations,
+            foreignKey: 'pageid',
+            as: 'locations'
+        });
+
+        Page.belongsToMany(models.People, {
+            through: models.PagesPeople,
+            foreignKey: 'pageid',
+            as: 'people'
         });
     };
 

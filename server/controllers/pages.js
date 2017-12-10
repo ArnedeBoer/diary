@@ -1,4 +1,6 @@
 const Page = require('../models').Page;
+const PagesLocations = require('../models').PagesLocations;
+const PagesPeople = require('../models').PagesPeople;
 const Op = require('sequelize').Op;
 const moment = require('moment');
 
@@ -8,11 +10,25 @@ module.exports = {
             .create({
                 date: req.body.date,
                 text: req.body.text,
-                people: req.body.people,
-                locations: req.body.locations,
                 userid: req.params.userid
             })
-            .then(page => res.status(201).send(page))
+            .then(page => {
+                req.body.people.forEach(person => {
+                    PagesPeople.
+                        create({
+                            pageid: page.id,
+                            peopleid: person.id
+                        });
+                });
+                req.body.locations.forEach(location => {
+                    PagesLocations.
+                        create({
+                            pageid: page.id,
+                            locationid: location.id
+                        });
+                });
+                res.status(201).send(page);
+            })
             .catch(error => res.status(400).send(error));
     },
     list(req, res) {
@@ -40,11 +56,10 @@ module.exports = {
     },
     filter(req, res) {
         const isDate = input => moment(input, 'YYYY-MM-DD', true).isValid();
-        const people = req.body.people;
-        const locations = req.body.locations;
+        const people = req.body.people.map(person => person.id);
+        const locations = req.body.locations.map(location => location.id);
         const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : null;
         const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : null;
-
         const filters = {};
 
         if (dateStart !== null && dateEnd !== null) {
@@ -62,26 +77,40 @@ module.exports = {
             };
         }
 
-        if (people !== null) {
-            filters.people = {
-                [Op.contains]: people
-            };
-        }
-
-        if (locations !== null) {
-            filters.locations = {
-                [Op.contains]: locations
-            };
-        }
-
         return Page
             .findAll({
                 where: filters,
                 order: [
                     ['date', 'DESC']
-                ]
+                ],
+                include: ['people', 'locations']
             })
-            .then(pages => res.status(200).send(pages))
+            .then(pages => {
+                const correctPages = pages.filter(page => {
+                    let correctPeople;
+                    let correctLocations;
+
+                    if (people === null) {
+                        correctPeople = true;
+                    } else {
+                        const peopleIds = page.dataValues.people.map(person => person.dataValues.id);
+
+                        correctPeople = people.every(person => peopleIds.indexOf(person) > -1);
+                    }
+
+                    if (locations === null) {
+                        correctLocations = true;
+                    } else {
+                        const locationIds = page.dataValues.locations.map(location => location.dataValues.id);
+
+                        correctLocations = locations.every(location => locationIds.indexOf(location) > -1);
+                    }
+
+                    return correctPeople && correctLocations;
+                });
+
+                res.status(200).send(correctPages);
+            })
             .catch(error => res.status(400).send(error));
     },
     edit(req, res) {
@@ -89,18 +118,52 @@ module.exports = {
             .update(
                 {
                     date: req.body.date,
-                    text: req.body.text,
-                    people: req.body.people,
-                    locations: req.body.locations
+                    text: req.body.text
                 },
                 {
                     where: {
                         id: req.body.id,
                         userid: req.body.userid
-                    }
+                    },
+                    returning: true
                 }
             )
-            .then(() => res.status(201).send('Success'))
+            .then(pages => {
+                const updatedPage = pages[1][0];
+                const pageId = updatedPage.dataValues.id;
+                
+                PagesPeople
+                    .destroy({
+                        where: {
+                            pageid: pageId
+                        }
+                    })
+                    .then(() => {
+                        req.body.people.forEach(person => {
+                            PagesPeople
+                                .create({
+                                    pageid: pageId,
+                                    peopleid: person.id
+                                });
+                        });
+                    });
+                PagesLocations
+                    .destroy({
+                        where: {
+                            pageid: pageId
+                        }
+                    })
+                    .then(() => {
+                        req.body.locations.forEach(location => {
+                            PagesLocations
+                                .create({
+                                    pageid: pageId,
+                                    locationid: location.id
+                                });
+                        });
+                    });
+                res.status(201).send(updatedPage);
+            })
             .catch(error => res.status(400).send(error));
     }
 };

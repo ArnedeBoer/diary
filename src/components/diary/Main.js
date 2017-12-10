@@ -3,9 +3,6 @@ import Menu from './Menu';
 import Item from './Item';
 import Add from './Add';
 import Filters from './Filters';
-import Input from './../fields/Input';
-import Textarea from './../fields/Textarea';
-import Select from './../fields/Select';
 
 class Main extends React.Component {
     constructor() {
@@ -22,46 +19,9 @@ class Main extends React.Component {
         this.setState({ items });
     }
 
-    renderType(field, index, page, handleChange, updateSelectState) {
-        switch(field.type) {
-            case 'textarea':
-            return (
-                <Textarea
-                    key={index}
-                    field={field}
-                    page={page}
-                    updateSelectState={updateSelectState}
-                    handleChange={handleChange}
-                />
-            );
-
-            case 'select':
-            return (
-                <Select
-                    key={index}
-                    field={field}
-                    page={page}
-                    updateSelectState={updateSelectState}
-                    handleChange={handleChange}
-                />
-            );
-
-            default:
-            return (
-                <Input
-                    key={index}
-                    field={field}
-                    page={page}
-                    updateSelectState={updateSelectState}
-                    handleChange={handleChange}
-                />
-            );
-        }
-    }
-
     render() {
         const { pageName, filters, fields } = this.props;
-
+        
         return (
             <div>
                 <Menu
@@ -72,7 +32,6 @@ class Main extends React.Component {
                         page={pageName}
                         fields={filters}
                         updateState={this.updateState}
-                        renderType={this.renderType}
                     />
                     <div id="page-list">
                         {
@@ -86,7 +45,6 @@ class Main extends React.Component {
                                         fields={fields}
                                         items={this.state.items}
                                         updateState={this.updateState}
-                                        renderType={this.renderType}
                                     />
                                 )
                         }
@@ -96,7 +54,6 @@ class Main extends React.Component {
                     <Add
                         page={pageName}
                         fields={fields}
-                        renderType={this.renderType}
                     />
                 </div>
             </div>

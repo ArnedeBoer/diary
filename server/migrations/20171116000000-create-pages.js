@@ -15,14 +15,6 @@ module.exports = {
                 type: Sequelize.TEXT,
                 allowNull: false
             },
-            people: {
-                type: Sequelize.ARRAY(Sequelize.STRING),
-                allowNull: true
-            },
-            locations: {
-                type: Sequelize.ARRAY(Sequelize.STRING),
-                allowNull: true
-            },
             userid: {
                 type: Sequelize.INTEGER,
                 onDelete: 'CASCADE',

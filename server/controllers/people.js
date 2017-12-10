@@ -19,7 +19,7 @@ module.exports = {
 
         if (name !== null) {
             filters.name = {
-                [Op.eq]: name
+                [Op.iLike]: `${name}%`
             };
         }
 
@@ -37,8 +37,8 @@ module.exports = {
         return People
             .update(
                 {
-                    text: req.body.text,
-                    name: req.body.name
+                    name: req.body.name,
+                    text: req.body.text
                 },
                 {
                     where: {
@@ -47,7 +47,7 @@ module.exports = {
                     }
                 }
             )
-            .then(() => res.status(201).send('Success'))
+            .then(person => res.status(201).send(person))
             .catch(error => res.status(400).send(error));
     }
 };

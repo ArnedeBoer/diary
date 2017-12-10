@@ -19,7 +19,7 @@ module.exports = {
 
         if (name !== null) {
             filters.name = {
-                [Op.eq]: name
+                [Op.iLike]: `${name}%`
             };
         }
 
@@ -37,8 +37,8 @@ module.exports = {
         return Locations
             .update(
                 {
-                    text: req.body.text,
-                    name: req.body.name
+                    name: req.body.name,
+                    text: req.body.text
                 },
                 {
                     where: {
