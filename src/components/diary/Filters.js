@@ -10,7 +10,7 @@ class Filters extends React.Component {
         const states = {};
 
         props.fields.forEach(field => {
-            return states[field.name] = null;    
+            states[field.name] = field.type === 'select' ? [] : null;
         });
 
         this.state = states;
@@ -21,24 +21,22 @@ class Filters extends React.Component {
         this.setState({ [e.target.name]: newValue });
     }
 
-    updateSelectState(field, value) {
-        const values = value.length === 0 ? null : value.map(val => val.id);
-
+    updateSelectState(field, values) {
         this.setState({ [field]: values})
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        const fields = {};
+        const data = {};
 
         this.props.fields.forEach(field => {
-            return fields[field.name] = this.state[field.name];  
+            return data[field.name] = this.state[field.name];  
         });
 
         fetch(`/api/${this.props.page}/filter`, {
             method: "POST",
-            body: JSON.stringify(fields),
+            body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -56,7 +54,7 @@ class Filters extends React.Component {
                     {
                         this.props.fields
                             .map((field, index) => {
-                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState);
+                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
                     }
                     <input
