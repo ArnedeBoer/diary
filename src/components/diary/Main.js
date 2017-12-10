@@ -22,7 +22,7 @@ class Main extends React.Component {
         this.setState({ items });
     }
 
-    renderType(field, index, page, handleChange, updateSelectState) {
+    renderType(field, index, page, handleChange, updateSelectState, state) {
         switch(field.type) {
             case 'textarea':
             return (
@@ -41,6 +41,7 @@ class Main extends React.Component {
                     key={index}
                     field={field}
                     page={page}
+                    addState={state}
                     updateSelectState={updateSelectState}
                     handleChange={handleChange}
                 />

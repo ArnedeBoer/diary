@@ -10,7 +10,7 @@ class Add extends React.Component {
         const states = {};
 
         props.fields.forEach(field => {
-            states[field.name] = field.type === 'select' ? [] : null;    
+            states[field.name] = field.type === 'select' ? [] : null;
         });
 
         this.state = states;
@@ -25,8 +25,8 @@ class Add extends React.Component {
         this.setState({ [field]: values})
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
+    handleSubmit(e) {
+        e.preventDefault();
 
         const data = {};
 
@@ -66,7 +66,7 @@ class Add extends React.Component {
                     {
                         this.props.fields
                             .map((field, index) => {
-                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState);
+                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
                     }
                     <input

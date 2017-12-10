@@ -126,7 +126,7 @@ class Item extends React.Component {
                     {
                         editFields
                             .map((field, index) => {
-                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState);
+                                return this.props.renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
                     }
                 </form>

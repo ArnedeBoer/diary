@@ -43,13 +43,16 @@ class Select extends React.Component {
     render() {
         const { placeholder, title } = this.props.field;
         const AsyncComponent = ReactSelect.Async;
+        let addState;
+
+        addState = title === 'People' ? this.props.addState.people : this.props.addState.locations;
 
         return (
             <div className="field">
                 <label>{title}:</label>
                 <AsyncComponent
                     placeholder={placeholder}
-                    value={this.state.value}
+                    value={this.props.addState === undefined ? this.state.value : addState}
                     onChange={this.onChange}
                     loadOptions={this.getOptions}
                     backspaceRemoves={true}
