@@ -1,12 +1,6 @@
 module.exports = {
     up: (queryInterface, Sequelize) =>
         queryInterface.createTable('PagesLocations', {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
             pageid: {
                 type: Sequelize.INTEGER,
                 allowNull: false
