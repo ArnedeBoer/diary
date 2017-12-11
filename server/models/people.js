@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     });
 
-    People.associate = (models) => {
+    People.associate = models => {
         People.belongsTo(models.User, {
             foreignKey: 'userid',
             onDelete: 'CASCADE'

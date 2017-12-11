@@ -14,7 +14,7 @@ class Menu extends React.Component {
                             return <li key={index}><a href={`/${pageName}`}>{this.capitalizeFirstLetter(pageName)}</a></li>
                         })
                     }
-                    <li><a href="/login">Logout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
         )

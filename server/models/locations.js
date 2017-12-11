@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     });
 
-    Locations.associate = (models) => {
+    Locations.associate = models => {
         Locations.belongsTo(models.User, {
             foreignKey: 'userid',
             onDelete: 'CASCADE'

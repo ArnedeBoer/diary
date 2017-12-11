@@ -2,12 +2,14 @@ const usersController = require('../controllers').users;
 const pagesController = require('../controllers').pages;
 const peopleController = require('../controllers').people;
 const locationsController = require('../controllers').locations;
+const sessionsController = require('../controllers').sessions;
 
 module.exports = app => {
     app.get('/api/user/all', usersController.list);
     app.get('/api/user/:userid', usersController.retrieve);
     app.get('/api/user/find/:username', usersController.findByUsername);
     app.post('/api/user/create', usersController.create);
+    app.post('/api/user/login', usersController.login);
 
     app.get('/api/pages/all', pagesController.list);
     app.post('/api/pages/filter', pagesController.filter);
@@ -22,4 +24,6 @@ module.exports = app => {
     app.post('/api/locations/create/:userid', locationsController.create);
     app.post('/api/locations/filter', locationsController.filter);
     app.post('/api/locations/edit', locationsController.edit);
+
+    app.post('/api/sessions/verify', sessionsController.verify);
 };

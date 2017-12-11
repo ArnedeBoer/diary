@@ -115,20 +115,27 @@ class App extends React.Component {
                             exact
                             key={index}
                             path={`/${page.name}`}
-                            render={ props =>
-                                <Main
-                                    {...props}
-                                    pageNames={pageNames}
-                                    pageName={page.name}
-                                    filters={page.filters}
-                                    fields={page.fields}
-                                />
+                            render={ props => {
+                                    return this.props.session ?
+                                    <Main
+                                        {...props}
+                                        pageNames={pageNames}
+                                        pageName={page.name}
+                                        filters={page.filters}
+                                        fields={page.fields}
+                                    /> : <Login />
+                                }
                             }
                         />
                     )
                 }
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/logout" render={ props => {
+                        localStorage.clear();
+                        window.location.replace('/login');
+                    }
+                } />
                 <Route component={NotFound} />
             </Switch>
         )

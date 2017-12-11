@@ -28,6 +28,7 @@
     "body-parser": "^1.18.2",
     "dateformat": "^3.0.2",
     "express": "^4.16.2",
+    "hash-generator": "^0.1.0",
     "moment": "^2.19.1",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.1",
