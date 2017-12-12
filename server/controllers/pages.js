@@ -31,29 +31,6 @@ module.exports = {
             })
             .catch(error => res.status(400).send(error));
     },
-    list(req, res) {
-        return Page
-            .findAll({
-                order: [
-                    ['date', 'DESC']
-                ]
-            })
-            .then(pages => res.status(200).send(pages))
-            .catch(error => res.status(400).send(error));
-    },
-    retrieve(req, res) {
-        return Page
-            .findById(req.params.postid)
-            .then(page => {
-                if (!page) {
-                    return res.status(404).send({
-                        message: 'Post Not Found',
-                    });
-                }
-                return res.status(200).send(page);
-            })
-            .catch(error => res.status(400).send(error));
-    },
     filter(req, res) {
         const isDate = input => moment(input, 'YYYY-MM-DD', true).isValid();
         const people = req.body.people.map(person => person.id);
