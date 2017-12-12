@@ -43,7 +43,7 @@ class Item extends React.Component {
         const { details } = this.props;
         let item = {
             id: details.id,
-            userid: 1
+            hash: localStorage.getItem('hash')
         };
 
         this.props.fields.forEach(field => {

@@ -42,7 +42,7 @@ const supportFields = [
     {
         name: 'name',
         title: 'Name',
-        placeholder: 'Cafe Bax',
+        placeholder: 'Name',
         type: 'text',
         required: true,
         filter: true
@@ -50,7 +50,7 @@ const supportFields = [
     {
         name: 'text',
         title: 'Description',
-        placeholder: 'This location is ...',
+        placeholder: 'What I like about...',
         type: 'textarea'
     }
 ]

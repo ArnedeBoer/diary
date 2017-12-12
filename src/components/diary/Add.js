@@ -29,15 +29,15 @@ class Add extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const data = {};
+        const data = {
+            hash: localStorage.getItem('hash')
+        };
 
         this.props.fields.forEach(field => {
-            return data[field.name] = this.state[field.name];  
+            data[field.name] = this.state[field.name];  
         });
 
-        const userid = '1';
-
-        fetch(`/api/${this.props.page}/create/${userid}`, {
+        fetch(`/api/${this.props.page}/create`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

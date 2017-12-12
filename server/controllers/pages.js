@@ -1,4 +1,5 @@
 const Page = require('../models').Page;
+const Sessions = require('../models').Sessions;
 const PagesLocations = require('../models').PagesLocations;
 const PagesPeople = require('../models').PagesPeople;
 const Op = require('sequelize').Op;
@@ -6,30 +7,40 @@ const moment = require('moment');
 
 module.exports = {
     create(req, res) {
-        return Page
-            .create({
-                date: req.body.date,
-                text: req.body.text,
-                userid: req.params.userid
+        const hash = req.body.hash;
+
+        return Sessions
+            .findOne({
+                where: {
+                    hash
+                }
             })
-            .then(page => {
-                req.body.people.forEach(person => {
-                    PagesPeople.
-                        create({
-                            pageid: page.id,
-                            peopleid: person.id
+            .then(session => {
+                return Page
+                    .create({
+                        date: req.body.date,
+                        text: req.body.text,
+                        userid: session.userid
+                    })
+                    .then(page => {
+                        req.body.people.forEach(person => {
+                            PagesPeople.
+                                create({
+                                    pageid: page.id,
+                                    peopleid: person.id
+                                });
                         });
-                });
-                req.body.locations.forEach(location => {
-                    PagesLocations.
-                        create({
-                            pageid: page.id,
-                            locationid: location.id
+                        req.body.locations.forEach(location => {
+                            PagesLocations.
+                                create({
+                                    pageid: page.id,
+                                    locationid: location.id
+                                });
                         });
-                });
-                res.status(201).send(page);
-            })
-            .catch(error => res.status(400).send(error));
+                        res.status(201).send(page);
+                    })
+                    .catch(error => res.status(400).send(error));
+        });
     },
     filter(req, res) {
         const isDate = input => moment(input, 'YYYY-MM-DD', true).isValid();
@@ -37,110 +48,149 @@ module.exports = {
         const locations = req.body.locations.map(location => location.id);
         const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : null;
         const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : null;
-        const filters = {};
+        const hash = req.body.hash;
 
-        if (dateStart !== null && dateEnd !== null) {
-            filters.date = {
-                [Op.gte]: dateStart,
-                [Op.lte]: dateEnd
-            };
-        } else if (dateStart !== null) {
-            filters.date = {
-                [Op.gte]: dateStart
-            };
-        } else if (dateEnd !== null) {
-            filters.date = {
-                [Op.lte]: dateEnd
-            };
-        }
-
-        return Page
-            .findAll({
-                where: filters,
-                order: [
-                    ['date', 'DESC']
-                ],
-                include: ['people', 'locations']
+        return Sessions
+            .findOne({
+                where: {
+                    hash
+                }
             })
-            .then(pages => {
-                const correctPages = pages.filter(page => {
-                    let correctPeople;
-                    let correctLocations;
+            .then(session => {
+                let filters;
 
-                    if (people === null) {
-                        correctPeople = true;
-                    } else {
-                        const peopleIds = page.dataValues.people.map(person => person.dataValues.id);
+                if (dateStart !== null && dateEnd !== null) {
+                    filters = {
+                        [Op.and]: {
+                            date: {
+                                [Op.gte]: dateStart,
+                                [Op.lte]: dateEnd
+                            },
+                            userid: session.userid
+                        }
+                    };
+                } else if (dateStart !== null) {
+                    filters = {
+                        [Op.and]: {
+                            date: {
+                                [Op.gte]: dateStart
+                            },
+                            userid: session.userid
+                        }
+                    };
+                } else if (dateEnd !== null) {
+                    filters = {
+                        [Op.and]: {
+                            date: {
+                                [Op.lte]: dateEnd
+                            },
+                            userid: session.userid
+                        }
+                    };
+                } else {
+                    filters = {
+                        userid: session.userid
+                    };
+                }
 
-                        correctPeople = people.every(person => peopleIds.indexOf(person) > -1);
-                    }
+                return Page
+                    .findAll({
+                        where: filters,
+                        order: [
+                            ['date', 'DESC']
+                        ],
+                        include: ['people', 'locations']
+                    })
+                    .then(pages => {
+                        const correctPages = pages.filter(page => {
+                            let correctPeople;
+                            let correctLocations;
 
-                    if (locations === null) {
-                        correctLocations = true;
-                    } else {
-                        const locationIds = page.dataValues.locations.map(location => location.dataValues.id);
+                            if (people === null) {
+                                correctPeople = true;
+                            } else {
+                                const peopleIds = page.dataValues.people.map(person => person.dataValues.id);
 
-                        correctLocations = locations.every(location => locationIds.indexOf(location) > -1);
-                    }
+                                correctPeople = people.every(person => peopleIds.indexOf(person) > -1);
+                            }
 
-                    return correctPeople && correctLocations;
-                });
+                            if (locations === null) {
+                                correctLocations = true;
+                            } else {
+                                const locationIds = page.dataValues.locations.map(location => location.dataValues.id);
 
-                res.status(200).send(correctPages);
-            })
-            .catch(error => res.status(400).send(error));
+                                correctLocations = locations.every(location => locationIds.indexOf(location) > -1);
+                            }
+
+                            return correctPeople && correctLocations;
+                        });
+
+                        res.status(200).send(correctPages);
+                    })
+                    .catch(error => res.status(400).send(error));
+            });
     },
     edit(req, res) {
-        return Page
-            .update(
-                {
-                    date: req.body.date,
-                    text: req.body.text
-                },
-                {
-                    where: {
-                        id: req.body.id,
-                        userid: req.body.userid
-                    },
-                    returning: true
+        const hash = req.body.hash;
+
+        return Sessions
+            .findOne({
+                where: {
+                    hash
                 }
-            )
-            .then(pages => {
-                const updatedPage = pages[1][0];
-                const pageId = updatedPage.dataValues.id;
-                
-                PagesPeople
-                    .destroy({
-                        where: {
-                            pageid: pageId
-                        }
-                    })
-                    .then(() => {
-                        req.body.people.forEach(person => {
-                            PagesPeople
-                                .create({
-                                    pageid: pageId,
-                                    peopleid: person.id
-                                });
-                        });
-                    });
-                PagesLocations
-                    .destroy({
-                        where: {
-                            pageid: pageId
-                        }
-                    })
-                    .then(() => {
-                        req.body.locations.forEach(location => {
-                            PagesLocations
-                                .create({
-                                    pageid: pageId,
-                                    locationid: location.id
-                                });
-                        });
-                    });
-                res.status(201).send(updatedPage);
             })
-            .catch(error => res.status(400).send(error));
+            .then(session => {
+                return Page
+                    .update(
+                        {
+                            date: req.body.date,
+                            text: req.body.text
+                        },
+                        {
+                            where: {
+                                id: req.body.id,
+                                userid: session.userid
+                            },
+                            returning: true
+                        }
+                    )
+                    .then(pages => {
+                        const updatedPage = pages[1][0];
+                        const pageId = updatedPage.dataValues.id;
+                        
+                        PagesPeople
+                            .destroy({
+                                where: {
+                                    pageid: pageId
+                                }
+                            })
+                            .then(() => {
+                                req.body.people.forEach(person => {
+                                    PagesPeople
+                                        .create({
+                                            pageid: pageId,
+                                            peopleid: person.id
+                                        });
+                                });
+                            });
+                        PagesLocations
+                            .destroy({
+                                where: {
+                                    pageid: pageId
+                                }
+                            })
+                            .then(() => {
+                                req.body.locations.forEach(location => {
+                                    PagesLocations
+                                        .create({
+                                            pageid: pageId,
+                                            locationid: location.id
+                                        });
+                                });
+                            });
+                        res.status(201).send(updatedPage);
+                    })
+                    .catch(error => res.status(400).send(error));
+            });
     }
 };

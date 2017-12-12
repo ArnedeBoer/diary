@@ -29,7 +29,9 @@ class Filters extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const data = {};
+        const data = {
+            hash: localStorage.getItem('hash')
+        };
 
         this.props.fields.forEach(field => {
             return data[field.name] = this.state[field.name];  
