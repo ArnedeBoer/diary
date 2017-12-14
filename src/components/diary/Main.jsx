@@ -1,8 +1,8 @@
 import React from 'react';
-import Menu from './Menu';
-import Item from './Item';
-import Add from './Add';
-import Filters from './Filters';
+import Menu from './Menu.jsx';
+import Item from './Item.jsx';
+import Add from './Add.jsx';
+import Filters from './Filters.jsx';
 
 class Main extends React.Component {
     constructor() {

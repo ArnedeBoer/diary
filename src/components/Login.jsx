@@ -1,17 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { renderType } from './../helpers';
+import { renderType } from './../helpers.jsx';
 
-const registerFields = [
+const loginFields = [
     {
         name: 'username',
         title: 'Username',
-        type: 'text',
-        required: true
-    },
-    {
-        name: 'displayName',
-        title: 'Display Name',
         type: 'text',
         required: true
     },
@@ -20,16 +14,10 @@ const registerFields = [
         title: 'Password',
         type: 'password',
         required: true
-    },
-    {
-        name: 'confirmPassword',
-        title: 'Confirm Password',
-        type: 'password',
-        required: true
     }
 ];
 
-class Register extends React.Component {
+class Login extends React.Component {
     constructor() {
         super();
 
@@ -39,7 +27,7 @@ class Register extends React.Component {
             error: false
         };
 
-        registerFields.forEach(field => {
+        loginFields.forEach(field => {
             states[field.name] = field.type === 'select' ? [] : '';
         });
 
@@ -55,11 +43,11 @@ class Register extends React.Component {
 
         const data = {};
 
-        registerFields.forEach(field => {
-            data[field.name] = this.state[field.name];  
+        loginFields.forEach(field => {
+            return data[field.name] = this.state[field.name];  
         });
 
-        fetch('/api/user/create', {
+        fetch('/api/user/login', {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -67,29 +55,35 @@ class Register extends React.Component {
             }
         })
         .then(res => {
-            if (res.status === 201) {
-                window.location.replace('/login');
+            if(res.status === 200) {
+                return res.json();
             }
 
-            if (res.status === 400) {
-                this.setState({error: true});
+            if(res.status === 400) {
+                return Promise.reject('Fail');
             }
+        })
+        .then(result => {
+            localStorage.setItem('hash', result.hash);
+            window.location.replace('/');
+        })
+        .catch(err => {
+            this.setState({error: true});
         });
     };
 
     render() {
-        const requiredFields = registerFields.filter(field => field.required);
+        const requiredFields = loginFields.filter(field => field.required);
         const formIsValid = requiredFields.every(field => {
-            return this.state[field.name].length >= 8 && this.state.password === this.state.confirmPassword;
+            return this.state[field.name].length >= 8;
         });
-        const errorMsg = 'Username is already used!';
 
         return (
-            <div id="register">
-                <h2>Register</h2>
-                <form id="register-form" onSubmit={(e) => this.handleSubmit(e)}>
+            <div id="login">
+                <h2>Login</h2>
+                <form id="login-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {
-                        registerFields
+                        loginFields
                             .map((field, index) => {
                                 return renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
@@ -100,11 +94,11 @@ class Register extends React.Component {
                         disabled={!formIsValid}
                     />
                 </form>
-                {this.state.error ? errorMsg : null}
-                <Link to='/login'>Or login</Link>
+                { this.state.error ? <div className="error">The username or password is not correct.</div> : null }
+                <Link to='/register'>Sign up</Link>
             </div>
         )
     }
 }
 
-export default Register;
+export default Login;

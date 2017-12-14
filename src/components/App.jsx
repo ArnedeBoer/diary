@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Main from './diary/Main';
-import Login from './Login';
-import Register from './Register';
-import NotFound from './NotFound';
+import Main from './diary/Main.jsx';
+import Login from './Login.jsx';
+import Register from './Register.jsx';
+import NotFound from './NotFound.jsx';
 
 const pageFields = [
     {

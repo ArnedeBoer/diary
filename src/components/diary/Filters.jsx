@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderType } from './../../helpers';
+import { renderType } from './../../helpers.jsx';
 
 class Filters extends React.Component {
     constructor(props) {

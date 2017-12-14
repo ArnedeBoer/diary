@@ -1,7 +1,7 @@
 import React from 'react';
-import Textarea from './components/fields/Textarea';
-import Select from './components/fields/Select';
-import Input from './components/fields/Input';
+import Textarea from './components/fields/Textarea.jsx';
+import Select from './components/fields/Select.jsx';
+import Input from './components/fields/Input.jsx';
 
 export const renderType = (field, index, page, handleChange, updateSelectState, state) => {
     switch(field.type) {

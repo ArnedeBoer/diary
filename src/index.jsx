@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import './styles/css/style.css';
-import App from './components/App';
+import './styles/style.scss';
+import App from './components/App.jsx';
 
 class Root extends React.Component {
     constructor() {
