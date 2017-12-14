@@ -1,8 +1,11 @@
 #menu {
     width: 70%;
     display: block;
-    margin: auto;
+    padding: 10px 15%;
+    margin-bottom: 30px;
     font-size: 1.2rem;
+    background-color: tomato;
+    box-shadow: 5px 5px 10px grey;
 
     ul {
         display: flex;
