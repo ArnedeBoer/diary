@@ -22,16 +22,16 @@ Install the modules
 $ npm install
 ```
 
-Start the react server
+Run build
+
+```
+$ npm run build
+```
+
+Start the server
 
 ```
 $ npm start
-```
-
-Start nodemon
-
-```
-$ nodemon src/app
 ```
 
 Optionally fill the database with initial data
