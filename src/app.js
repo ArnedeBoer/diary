@@ -14,6 +14,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
 
-app.listen(8080, () => {
-    console.log('server started at 8080');
+app.listen(3000, () => {
+    console.log('server started at 3000');
 });
