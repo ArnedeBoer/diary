@@ -9,25 +9,11 @@ let config;
 try {
     config = require(`${__dirname}/../config/config.json`)[env];
 } catch (err) {
-    console.log('Create and configure a config.json or use enviroment variables.');
+    console.log('Create and configure a /server/config/config.json.');
 }
 
-const database = process.env.POSTGRES_DATABASE;
-const user = process.env.POSTGRES_USER;
-const password = process.env.POSTGRES_PASSWORD;
-const host = process.env.POSTGRES_HOST || 'localhost'; // as the assignment specifies
-const dialect = process.env.POSTGRES_DIALECT || 'postgres'; // as the assignment specifies
-
-let sequelize;
-
-if (config === undefined) {
-  sequelize = new Sequelize(database, user, password, { host, dialect });
-} else {
-  sequelize = new Sequelize(
-    config.database, config.username, config.password, config
-  );
-}
-
+const { database, username, password, host, dialect, protocol } = config;
+const sequelize = new Sequelize(database, username, password, { host, dialect, protocol });
 
 fs
     .readdirSync(__dirname)

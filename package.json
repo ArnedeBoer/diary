@@ -28,6 +28,7 @@
     "express": "^4.16.2",
     "hash-generator": "^0.1.0",
     "moment": "^2.19.1",
+    "mysql2": "^1.5.2",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "react": "15.3.2",
