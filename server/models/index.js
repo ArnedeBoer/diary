@@ -12,8 +12,8 @@ try {
     console.log('Create and configure a /server/config/config.json.');
 }
 
-const { database, username, password, host, dialect, protocol } = config;
-const sequelize = new Sequelize(database, username, password, { host, dialect, protocol });
+const { database, username, password, host, port, protocol, dialect } = config;
+const sequelize = new Sequelize(database, username, password, { host, port, protocol, dialect });
 
 fs
     .readdirSync(__dirname)
