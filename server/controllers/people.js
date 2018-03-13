@@ -40,7 +40,7 @@ module.exports = {
                     filters = {
                         [Op.and]: {
                             name: {
-                                [Op.iLike]: `${name}%`
+                                [Op.iLike]: `%${name}%`
                             },
                             userid: {
                                 [Op.eq]: session.userid
