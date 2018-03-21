@@ -66,7 +66,8 @@ module.exports = {
                                 [Op.gte]: dateStart,
                                 [Op.lte]: dateEnd
                             },
-                            userid: session.userid
+                            userid: session.userid,
+                            active: true
                         }
                     };
                 } else if (dateStart !== null) {
@@ -75,7 +76,8 @@ module.exports = {
                             date: {
                                 [Op.gte]: dateStart
                             },
-                            userid: session.userid
+                            userid: session.userid,
+                            active: true
                         }
                     };
                 } else if (dateEnd !== null) {
@@ -84,12 +86,16 @@ module.exports = {
                             date: {
                                 [Op.lte]: dateEnd
                             },
-                            userid: session.userid
+                            userid: session.userid,
+                            active: true
                         }
                     };
                 } else {
                     filters = {
-                        userid: session.userid
+                        [Op.and]: {
+                            userid: session.userid,
+                            active: true
+                        }
                     };
                 }
 
@@ -121,6 +127,9 @@ module.exports = {
 
                                 correctLocations = locations.every(location => locationIds.indexOf(location) > -1);
                             }
+
+                            page.dataValues.people = page.dataValues.people.filter(person => person.dataValues.active === true);
+                            page.dataValues.locations = page.dataValues.locations.filter(location => location.dataValues.active === true);
 
                             return correctPeople && correctLocations;
                         });
@@ -192,5 +201,31 @@ module.exports = {
                     })
                     .catch(error => res.status(400).send(error));
             });
+    },
+    delete(req, res) {
+        const hash = req.body.hash;
+
+        return Sessions
+            .findOne({
+                where: {
+                    hash
+                }
+            })
+            .then(session => {
+                return Pages
+                    .update(
+                        {
+                            active: false
+                        },
+                        {
+                            where: {
+                                id: req.body.id,
+                                userid: session.userid
+                            }
+                        }
+                    )
+                    .then(pages => res.status(201).send(pages))
+                    .catch(error => res.status(400).send(error));
+            })
     }
 };

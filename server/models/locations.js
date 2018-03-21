@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
         text: {
             type: DataTypes.TEXT,
             allowNull: true
+        },
+        active: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
     }, {
         timestamps: false

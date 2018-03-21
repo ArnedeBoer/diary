@@ -42,14 +42,16 @@ module.exports = {
                             name: {
                                 [Op.iLike]: `%${name}%`
                             },
-                            userid: {
-                                [Op.eq]: session.userid
-                            }
+                            userid: session.userid,
+                            active: true
                         }
                     };
                 } else {
                     filters = {
-                        userid: session.userid
+                        [Op.and]: {
+                            userid: session.userid,
+                            active: true
+                        }
                     };
                 }
 
@@ -90,5 +92,31 @@ module.exports = {
                     .then(location => res.status(201).send(location))
                     .catch(error => res.status(400).send(error));
             });
+    },
+    delete(req, res) {
+        const hash = req.body.hash;
+
+        return Sessions
+            .findOne({
+                where: {
+                    hash
+                }
+            })
+            .then(session => {
+                return Locations
+                    .update(
+                        {
+                            active: false
+                        },
+                        {
+                            where: {
+                                id: req.body.id,
+                                userid: session.userid
+                            }
+                        }
+                    )
+                    .then(location => res.status(201).send(location))
+                    .catch(error => res.status(400).send(error));
+            })
     }
 };

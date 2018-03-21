@@ -8,6 +8,7 @@ class Item extends React.Component {
 
         this.edit = this.edit.bind(this);
         this.save = this.save.bind(this);
+        this.delete = this.delete.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.updateSelectState = this.updateSelectState.bind(this);
 
@@ -69,6 +70,38 @@ class Item extends React.Component {
         });
     }
 
+    delete() {
+        const { details } = this.props;
+        let item = {
+            id: details.id,
+            hash: localStorage.getItem('hash')
+        };
+
+        this.props.fields.forEach(field => {
+            item[field.name] = this.state[field.name];
+        });
+
+        fetch(`/api/${this.props.page}/delete`, {
+            method: "POST",
+            body: JSON.stringify(item),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => {
+            if (res.status === 201) {
+                this.setState({editing: false});
+
+                const items = this.props.items;
+                const itemsFiltered = items.filter(itemToFilter => {
+                    return itemToFilter.id !== item.id;
+                });
+
+                this.props.updateState(itemsFiltered);
+            }
+        });
+    }
+
     renderNormal() {
         let peopleList;
         let locationsList;
@@ -115,14 +148,14 @@ class Item extends React.Component {
         const { details } = this.props;
         const editFields = fields.map(field => {
             let editField = Object.assign({}, field);
-            
+
             editField.defaultValue = field.type === 'date' ? dateformat(details.date, 'yyyy-mm-dd') : details[field.name];
 
             return editField;
         });
 
         return (
-            <div className="list-item person">
+            <div className="list-item">
                 <form>
                     {
                         editFields
@@ -132,6 +165,7 @@ class Item extends React.Component {
                     }
                 </form>
                 <button className="save" onClick={this.save}>Save</button>
+                <button className="delete" onClick={this.delete}>Delete</button>
             </div>
         )
     }
