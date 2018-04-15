@@ -1,6 +1,6 @@
 import React from 'react';
 import dateformat from 'dateformat';
-import { renderType } from './../../helpers.jsx';
+import FieldType from './../fields/FieldType.jsx';
 
 class Item extends React.Component {
     constructor(props) {
@@ -159,8 +159,17 @@ class Item extends React.Component {
                 <form>
                     {
                         editFields
-                            .map(field => {
-                                return renderType(field, this.props.page, this.handleChange, this.updateSelectState, this.state);
+                            .map((field, index) => {
+                                return (
+                                    <FieldType
+                                        field={field}
+                                        key={index}
+                                        page={this.props.page}
+                                        handleChange={this.handleChange}
+                                        updateSelectState={this.updateSelectState}
+                                        state={this.state}
+                                    />
+                                )
                             })
                     }
                 </form>

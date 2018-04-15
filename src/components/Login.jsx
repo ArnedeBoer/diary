@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { renderType } from './../helpers.jsx';
+import FieldType from './fields/FieldType.jsx';
 
 const loginFields = [
     {
@@ -84,8 +84,17 @@ class Login extends React.Component {
                 <form id="login-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {
                         loginFields
-                            .map(field => {
-                                return renderType(field, this.props.page, this.handleChange, this.updateSelectState, this.state);
+                            .map((field, index) => {
+                                return (
+                                    <FieldType
+                                        field={field}
+                                        key={index}
+                                        page={this.props.page}
+                                        handleChange={this.handleChange}
+                                        updateSelectState={this.updateSelectState}
+                                        state={this.state}
+                                    />
+                                )
                             })
                     }
                     <input

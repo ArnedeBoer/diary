@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderType } from './../../helpers.jsx';
+import FieldType from './../fields/FieldType.jsx';
 
 class Filters extends React.Component {
     constructor(props) {
@@ -56,8 +56,17 @@ class Filters extends React.Component {
                 <form id="filter-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {
                         this.props.fields
-                            .map(field => {
-                                return renderType(field, this.props.page, this.handleChange, this.updateSelectState, this.state);
+                            .map((field, index) => {
+                                return (
+                                    <FieldType
+                                        field={field}
+                                        key={index}
+                                        page={this.props.page}
+                                        handleChange={this.handleChange}
+                                        updateSelectState={this.updateSelectState}
+                                        state={this.state}
+                                    />
+                                )
                             })
                     }
                     <input
