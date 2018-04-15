@@ -1,33 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FieldType from './fields/FieldType.jsx';
-
-const registerFields = [
-    {
-        name: 'username',
-        title: 'Username',
-        type: 'text',
-        required: true
-    },
-    {
-        name: 'displayName',
-        title: 'Display Name',
-        type: 'text',
-        required: true
-    },
-    {
-        name: 'password',
-        title: 'Password',
-        type: 'password',
-        required: true
-    },
-    {
-        name: 'confirmPassword',
-        title: 'Confirm Password',
-        type: 'password',
-        required: true
-    }
-];
+import { registerFields } from './../defaults.js';
 
 class Register extends React.Component {
     constructor() {

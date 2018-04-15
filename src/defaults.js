@@ -1,3 +1,45 @@
+export const loginFields = [
+    {
+        name: 'username',
+        title: 'Username',
+        type: 'text',
+        required: true
+    },
+    {
+        name: 'password',
+        title: 'Password',
+        type: 'password',
+        required: true
+    }
+];
+
+export const registerFields = [
+    {
+        name: 'username',
+        title: 'Username',
+        type: 'text',
+        required: true
+    },
+    {
+        name: 'displayName',
+        title: 'Display Name',
+        type: 'text',
+        required: true
+    },
+    {
+        name: 'password',
+        title: 'Password',
+        type: 'password',
+        required: true
+    },
+    {
+        name: 'confirmPassword',
+        title: 'Confirm Password',
+        type: 'password',
+        required: true
+    }
+];
+
 export const pageFields = [
     {
         name: 'date',
@@ -83,4 +125,4 @@ export const pages = [
 
 export const pageNames = pages.map(page => {
     return page.name;
-})
+});

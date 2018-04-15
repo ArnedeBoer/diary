@@ -1,21 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FieldType from './fields/FieldType.jsx';
-
-const loginFields = [
-    {
-        name: 'username',
-        title: 'Username',
-        type: 'text',
-        required: true
-    },
-    {
-        name: 'password',
-        title: 'Password',
-        type: 'password',
-        required: true
-    }
-];
+import { loginFields } from './../defaults.js';
 
 class Login extends React.Component {
     constructor() {
