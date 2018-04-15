@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Menu extends React.Component {
     capitalizeFirstLetter(string) {
@@ -11,10 +12,18 @@ class Menu extends React.Component {
                 <ul>
                     {
                         this.props.pageNames.map((pageName, index) => {
-                            return <li key={index}><a href={`/${pageName}`}>{this.capitalizeFirstLetter(pageName)}</a></li>
+                            const path = `/${pageName}`;
+
+                            return (
+                                <li key={index}>
+                                    <Link to={path}>{this.capitalizeFirstLetter(pageName)}</Link>
+                                </li>
+                            )
                         })
                     }
-                    <li><a href="/logout">Logout</a></li>
+                    <li>
+                        <Link to='/logout'>Logout</Link>
+                    </li>
                 </ul>
             </div>
         )
