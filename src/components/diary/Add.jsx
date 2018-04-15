@@ -66,8 +66,8 @@ class Add extends React.Component {
                 <form id="add-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {
                         this.props.fields
-                            .map((field, index) => {
-                                return renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
+                            .map(field => {
+                                return renderType(field, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
                     }
                     <input

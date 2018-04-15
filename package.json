@@ -2,9 +2,9 @@
   "name": "diary",
   "version": "1.0.0",
   "description": "Final Project NYCDA",
-  "main": "app.js",
+  "main": "diary.js",
   "scripts": {
-    "start": "nodemon src/app.js",
+    "start": "nodemon diary.js",
     "dev": "webpack -d --watch",
     "build": "webpack -p"
   },

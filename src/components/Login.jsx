@@ -84,8 +84,8 @@ class Login extends React.Component {
                 <form id="login-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {
                         loginFields
-                            .map((field, index) => {
-                                return renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
+                            .map(field => {
+                                return renderType(field, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
                     }
                     <input

@@ -3,12 +3,11 @@ import Textarea from './components/fields/Textarea.jsx';
 import Select from './components/fields/Select.jsx';
 import Input from './components/fields/Input.jsx';
 
-export const renderType = (field, index, page, handleChange, updateSelectState, state) => {
+export const renderType = (field, page, handleChange, updateSelectState, state) => {
     switch(field.type) {
         case 'textarea':
         return (
             <Textarea
-                key={index}
                 field={field}
                 page={page}
                 updateSelectState={updateSelectState}
@@ -19,7 +18,6 @@ export const renderType = (field, index, page, handleChange, updateSelectState, 
         case 'select':
         return (
             <Select
-                key={index}
                 field={field}
                 page={page}
                 addState={state}
@@ -31,7 +29,6 @@ export const renderType = (field, index, page, handleChange, updateSelectState, 
         default:
         return (
             <Input
-                key={index}
                 field={field}
                 page={page}
                 updateSelectState={updateSelectState}

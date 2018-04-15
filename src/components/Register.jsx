@@ -90,8 +90,8 @@ class Register extends React.Component {
                 <form id="register-form" onSubmit={(e) => this.handleSubmit(e)}>
                     {
                         registerFields
-                            .map((field, index) => {
-                                return renderType(field, index, this.props.page, this.handleChange, this.updateSelectState, this.state);
+                            .map(field => {
+                                return renderType(field, this.props.page, this.handleChange, this.updateSelectState, this.state);
                             })
                     }
                     <input
