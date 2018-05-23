@@ -30,8 +30,7 @@ class Select extends React.Component {
         return fetch(`/api/${fieldType}/filter/`, {
             method: "POST",
             body: JSON.stringify({
-                name: input,
-                hash: localStorage.getItem('hash')
+                name: input
             }),
             headers: {
                 "Content-Type": "application/json"

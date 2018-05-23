@@ -18,11 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     People.associate = models => {
-        People.belongsTo(models.User, {
-            foreignKey: 'userid',
-            onDelete: 'CASCADE'
-        });
-
         People.belongsToMany(models.Page, {
             through: models.PagesPeople,
             foreignKey: 'peopleid'

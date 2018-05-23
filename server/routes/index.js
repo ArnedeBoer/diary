@@ -5,9 +5,6 @@ const locationsController = require('../controllers').locations;
 const sessionsController = require('../controllers').sessions;
 
 module.exports = app => {
-    app.post('/api/user/create', usersController.create);
-    app.post('/api/user/login', usersController.login);
-
     app.post('/api/pages/create', pagesController.create);
     app.post('/api/pages/filter', pagesController.filter);
     app.post('/api/pages/edit', pagesController.edit);
@@ -22,6 +19,4 @@ module.exports = app => {
     app.post('/api/locations/filter', locationsController.filter);
     app.post('/api/locations/edit', locationsController.edit);
     app.post('/api/locations/delete', locationsController.delete);
-
-    app.post('/api/sessions/verify', sessionsController.verify);
 };

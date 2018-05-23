@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class Menu extends React.Component {
-    capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
 
+class Menu extends React.Component {
     render() {
         return (
             <div id="menu">
@@ -16,14 +14,11 @@ class Menu extends React.Component {
 
                             return (
                                 <li key={index}>
-                                    <Link to={path}>{this.capitalizeFirstLetter(pageName)}</Link>
+                                    <Link to={path}>{capitalizeFirstLetter(pageName)}</Link>
                                 </li>
                             )
                         })
                     }
-                    <li>
-                        <Link to='/logout'>Logout</Link>
-                    </li>
                 </ul>
             </div>
         )

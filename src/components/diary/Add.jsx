@@ -19,6 +19,7 @@ class Add extends React.Component {
 
     handleChange(e) {
         const newValue = e.target.value === '' ? null : e.target.value;
+
         this.setState({ [e.target.name]: newValue });
     }
 
@@ -29,9 +30,7 @@ class Add extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const data = {
-            hash: localStorage.getItem('hash')
-        };
+        const data = {};
 
         this.props.fields.forEach(field => {
             data[field.name] = this.state[field.name];  

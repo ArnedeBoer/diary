@@ -25,6 +25,7 @@ class Item extends React.Component {
 
     handleChange(e) {
         const newValue = e.target.value === '' ? null : e.target.value;
+
         this.setState({ [e.target.name]: newValue });
     }
 
@@ -43,8 +44,7 @@ class Item extends React.Component {
     save() {
         const { details } = this.props;
         let item = {
-            id: details.id,
-            hash: localStorage.getItem('hash')
+            id: details.id
         };
 
         this.props.fields.forEach(field => {

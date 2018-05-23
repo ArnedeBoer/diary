@@ -18,11 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Page.associate = models => {
-        Page.belongsTo(models.User, {
-            foreignKey: 'userid',
-            onDelete: 'CASCADE'
-        });
-
         Page.belongsToMany(models.Locations, {
             through: models.PagesLocations,
             foreignKey: 'pageid',
