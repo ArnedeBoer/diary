@@ -30,8 +30,8 @@ const generateSublist = (type, listItems) => {
 };
 
 class Item extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.toggle = this.toggle.bind(this);
     this.saveItemAndUpdateItems = this.saveItemAndUpdateItems.bind(this);
@@ -80,20 +80,16 @@ class Item extends Component {
   }
 
   render() {
-    const { itemType, item, itemFields, changeFieldValue } = this.props;
+    const { itemType, item, fields, changeFieldValue } = this.props;
     const { date, editing, name, description, people, locations } = item;
     const title = date ? dateformat(date, 'mmmm dS yyyy') : name;
-
-    Object.keys(itemFields).forEach(field => {
-      itemFields[field].value = field === 'date' ? dateformat(item[field], 'yyyy-mm-dd') : item[field];
-    });
 
     if(editing) {
       return (
         <div className="list-item">
           <Form
             formType="itemFields"
-            fields={itemFields}
+            fields={fields}
             itemType={itemType}
             changeFieldValue={changeFieldValue}
             submit={this.saveItemAndUpdateItems}

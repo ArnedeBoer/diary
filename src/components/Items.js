@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import dateformat from 'dateformat';
 
 import Item from './Item';
 
@@ -11,12 +12,18 @@ class Items extends Component {
         <h1>Items:</h1>
         {
           items.map((item, index) => {
+            const fields = JSON.parse(JSON.stringify(itemFields));
+
+            Object.keys(fields).forEach(field => {
+              fields[field].value = field === 'date' ? dateformat(item[field], 'yyyy-mm-dd') : item[field];
+            });
+
             return (
               <Item
                 key={index}
-                item={item}
                 itemType={itemType}
-                itemFields={itemFields}
+                item={item}
+                fields={fields}
                 toggleItemEdit={toggleItemEdit}
                 changeFieldValue={changeFieldValue}
                 updateItem={updateItem}
