@@ -1,9 +1,10 @@
-#filters {
+#view {
+    width: 50%;
+    float: left;
     
-    #filter-form {
+    #filters {
         margin: auto;
         display: block;
-        width: 90%;
         margin-bottom: 30px;
 
         .field {

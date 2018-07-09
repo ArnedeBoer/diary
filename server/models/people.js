@@ -1,28 +1,28 @@
 module.exports = (sequelize, DataTypes) => {
-    const People = sequelize.define('People', {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        text: {
-            type: DataTypes.TEXT,
-            allowNull: true
-        },
-        active: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: true
-        }
-    }, {
-        timestamps: false
+  const people = sequelize.define('people', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    }
+  }, {
+    timestamps: false
+  });
+
+  people.associate = models => {
+    people.belongsToMany(models.pages, {
+      through: models.pagespeople,
+      foreignKey: 'peopleid'
     });
+  };
 
-    People.associate = models => {
-        People.belongsToMany(models.Page, {
-            through: models.PagesPeople,
-            foreignKey: 'peopleid'
-        });
-    };
-
-    return People;
+  return people;
 };

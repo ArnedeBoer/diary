@@ -1,11 +1,11 @@
 {
-    "development": {
-        "username": "",
-        "password": "",
-        "database": "",
-        "host": "",
-        "port": ,
-        "protocol": "",
-        "dialect": ""
-    }
+  "development": {
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
+    "port": ,
+    "protocol": "",
+    "dialect": ""
+  }
 }

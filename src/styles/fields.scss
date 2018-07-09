@@ -5,20 +5,18 @@
         min-width: 150px;
     }
 
-    .field {
-        margin-bottom: 15px;
+    label {
+        margin-top: 15px;
     }
 
     textarea {
         height: 200px;
     }
 
-    button {
+    #submit {
+        margin-top: 20px;
+        width: 50px;
         padding: 10px 20px;
         margin-right: 20px;
-    }
-
-    #submit {
-        width: 50px;
     }
 }
