@@ -22,19 +22,19 @@
   },
   "homepage": "https://github.com/ArnedeBoer/diary#readme",
   "dependencies": {
-    "bcrypt": "^1.0.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "body-parser": "^1.18.2",
     "dateformat": "^3.0.2",
     "express": "^4.16.2",
-    "hash-generator": "^0.1.0",
     "moment": "^2.19.1",
     "mysql2": "^1.5.2",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "react": "15.3.2",
     "react-dom": "15.3.2",
-    "react-router-dom": "^4.2.2",
+    "react-redux": "^5.0.7",
     "react-select": "^1.0.0-rc.10",
+    "redux": "^4.0.0",
     "sequelize": "^4.22.1"
   },
   "devDependencies": {

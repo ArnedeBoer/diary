@@ -1,28 +1,28 @@
 module.exports = (sequelize, DataTypes) => {
-    const Locations = sequelize.define('Locations', {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        text: {
-            type: DataTypes.TEXT,
-            allowNull: true
-        },
-        active: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: true
-        }
-    }, {
-        timestamps: false
+  const locations = sequelize.define('locations', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    }
+  }, {
+    timestamps: false
+  });
+
+  locations.associate = models => {
+    locations.belongsToMany(models.pages, {
+      through: models.pageslocations,
+      foreignKey: 'locationid'
     });
+  };
 
-    Locations.associate = models => {
-        Locations.belongsToMany(models.Page, {
-            through: models.PagesLocations,
-            foreignKey: 'locationid'
-        });
-    };
-
-    return Locations;
+  return locations;
 };

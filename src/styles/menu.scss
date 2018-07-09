@@ -3,7 +3,7 @@
     display: block;
     padding: 0px 15%;
     margin-bottom: 30px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     background-color: tomato;
     box-shadow: 5px 5px 10px grey;
 
@@ -13,11 +13,12 @@
         list-style: none;
 
         li {
-            padding: 30px;
-            
+
             a {
+                display: inline-block;
+                padding: 1rem 6rem;
+                text-align: center;
                 text-decoration: none;
-                padding: 30px;
                 color: white;
             }
         }

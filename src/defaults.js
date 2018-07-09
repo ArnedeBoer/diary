@@ -1,86 +1,134 @@
-export const pageFields = [
-    {
-        name: 'date',
-        title: 'Date',
-        type: 'date',
-        required: true
-    },
-    {
-        name: 'text',
-        title: 'Description',
-        placeholder: 'Dear diary...',
-        type: 'textarea',
-        required: true
-    },
-    {
-        name: 'people',
-        title: 'People',
-        type: 'select',
-        placeholder: 'Bob, Chris, ...',
-        list: 'people-list',
-        filter: true
-    },
-    {
-        name: 'locations',
-        title: 'Locations',
-        type: 'select',
-        placeholder: 'Cafe Bax, Cafe Lennep, ...',
-        list: 'location-list',
-        filter: true
-    }
-];
+export const itemsInfo = {
+	pages: {
+		filters: {
+			dateStart: {
+				type: 'date',
+				label: 'Date Start'
+			},
+			dateEnd: {
+				type: 'date',
+				label: 'Date End'
+			},
+			people: {
+				type: 'select',
+				label: 'People',
+				placeholder: 'Bob, Mary, ...'
+			},
+			locations: {
+				type: 'select',
+				label: 'Location',
+				placeholder: 'Cafe Bax, Cafe Lennep, ...'
+			}
+		},
+		fields: {
+			date: {
+				type: 'date',
+				label: 'Date'
+			},
+			description: {
+				type: 'textarea',
+				label: 'Description',
+				placeholder: 'A description...'
+			},
+			people: {
+				type: 'select',
+				label: 'People',
+				placeholder: 'Bob, Mary, ...'
+			},
+			locations: {
+				type: 'select',
+				label: 'Location',
+				placeholder: 'Cafe Bax, Cafe Lennep, ...'
+			}
+		},
+		itemFields: {
+			date: {
+				type: 'date',
+				label: 'Date'
+			},
+			description: {
+				type: 'textarea',
+				label: 'Description',
+				placeholder: 'A description...'
+			},
+			people: {
+				type: 'select',
+				label: 'People',
+				placeholder: 'Bob, Mary, ...'
+			},
+			locations: {
+				type: 'select',
+				label: 'Location',
+				placeholder: 'Cafe Bax, Cafe Lennep, ...'
+			}
+		}
+	},
+	people: {
+		filters: {
+			name: {
+				type: 'text',
+				label: 'Name',
+				placeholder: 'Bob, Mary, ...'
+			}
+		},
+		fields: {
+			name: {
+				type: 'text',
+				label: 'Name',
+				placeholder: 'Bob, Mary, ...'
+			},
+			description: {
+				type: 'textarea',
+				label: 'Description',
+				placeholder: 'A description...'
+			}
+		},
+		itemFields: {
+			name: {
+				type: 'text',
+				label: 'Name',
+				placeholder: 'Bob, Mary, ...'
+			},
+			description: {
+				type: 'textarea',
+				label: 'Description',
+				placeholder: 'A description...'
+			}
+		}
+	},
+	locations: {
+		filters: {
+			name: {
+				type: 'text',
+				label: 'Name',
+				placeholder: 'Cafe Bax, Cafe Lennep, ...'
+			},
+		},
+		fields: {
+			name: {
+				type: 'text',
+				label: 'Name',
+				placeholder: 'Cafe Bax, Cafe Lennep, ...'
+			},
+			description: {
+				type: 'textarea',
+				label: 'Description',
+				placeholder: 'A description...'
+			}
+		},
+		itemFields: {
+			name: {
+				type: 'text',
+				label: 'Name',
+				placeholder: 'Cafe Bax, Cafe Lennep, ...'
+			},
+			description: {
+				type: 'textarea',
+				label: 'Description',
+				placeholder: 'A description...'
+			}
+		}
+	}
+};
 
-export const supportFields = [
-    {
-        name: 'name',
-        title: 'Name',
-        placeholder: 'Name',
-        type: 'text',
-        required: true,
-        filter: true
-    },
-    {
-        name: 'text',
-        title: 'Description',
-        placeholder: 'What I like about...',
-        type: 'textarea'
-    }
-]
-
-const initialFilters = [
-    {
-        name: 'dateStart',
-        title: 'Date start',
-        type: 'date'
-    },
-    {
-        name: 'dateEnd',
-        title: 'Date end',
-        type: 'date'
-    }
-];
-
-const pageFilters = initialFilters.concat(pageFields.filter(field => field.filter));
-const supportFilters = supportFields.filter(field => field.filter);
-
-export const pages = [
-    {
-        name: 'pages',
-        filters: pageFilters,
-        fields: pageFields
-    },
-    {
-        name: 'people',
-        filters: supportFilters,
-        fields: supportFields
-    },
-    {
-        name: 'locations',
-        filters: supportFilters,
-        fields: supportFields
-    }
-];
-
-export const pageNames = pages.map(page => {
-    return page.name;
-});
+export const itemTypes = Object.keys(itemsInfo);
