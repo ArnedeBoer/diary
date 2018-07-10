@@ -1,17 +1,7 @@
-const nullifyStrings = data => {
-  Object.keys(data).forEach(thing => {
-    const value = data[thing];
-
-    data[thing] = value === '' ? null : value;
-  });
-
-  return data;
-};
-
 const performFetch = (itemType, path, data) =>
   fetch(`/api/${itemType}/${path}`, {
     method: "POST",
-    body: JSON.stringify(nullifyStrings(data)),
+    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json"
     }

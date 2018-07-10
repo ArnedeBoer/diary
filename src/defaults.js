@@ -40,7 +40,6 @@ export const itemsInfo = {
         type: 'select',
         label: 'Location',
         placeholder: 'Cafe Bax, Cafe Lennep, ...',
-        required: true
       }
     },
     itemFields: {

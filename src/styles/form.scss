@@ -1,14 +1,19 @@
 form {
-    label, input, textarea {
-        display: block;
-        width: 100%;
-    }
+  label, input, textarea {
+    display: block;
+    width: 100%;
+  }
 
-    .field {
-        margin-bottom: 15px;
-    }
+  .field {
+    margin-bottom: 15px;
+  }
 
-    textarea {
-        height: 200px;
-    }
+  textarea {
+    height: 200px;
+  }
+
+  .validation {
+    margin-bottom: 15px;
+    color: red;
+  }
 };
