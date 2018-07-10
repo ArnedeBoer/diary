@@ -97,7 +97,7 @@ class Item extends Component {
           />
           {
             !this.state.deleting &&
-              <button className="delete" onClick={this.toggleDelete}>Delete</button>
+              <button className="secondary-button" onClick={this.toggleDelete}>Delete</button>
           }
           {
             this.state.deleting &&

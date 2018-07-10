@@ -119,7 +119,7 @@ class Form extends Component {
 
         <button className="primary-button" onClick={this.handleSubmit}>Submit</button>
         {
-          cancel && <button className="cancel" onClick={cancel}>Cancel</button>
+          cancel && <button className="secondary-button" onClick={cancel}>Cancel</button>
         }
       </form>
     )
