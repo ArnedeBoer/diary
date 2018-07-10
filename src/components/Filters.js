@@ -20,7 +20,7 @@ class Filters extends Component {
     const { itemType, filters, changeFieldValue } = this.props;
 
     return (
-      <div id="filters">
+      <div className="sub">
         <h1>Filters:</h1>
         <Form
           formType="filters"

@@ -102,8 +102,8 @@ class Item extends Component {
           {
             this.state.deleting &&
               <div>
-                <button className="delete" onClick={this.toggleDelete}>Cancel</button>
-                <button className="delete" onClick={this.delete}>Delete for real</button>
+                <button className="secondary-button" onClick={this.toggleDelete}>Cancel</button>
+                <button className="secondary-button" onClick={this.delete}>Delete for real</button>
               </div>
           }
         </div>
@@ -122,7 +122,7 @@ class Item extends Component {
           {generateSublist('locations', locations)}
         </div>
         <div className="info-end" style={{clear: 'both'}}></div>
-        <button className="edit" onClick={this.toggle}>Edit</button>
+        <button className="secondary-button" onClick={this.toggle}>Edit</button>
       </div>
     )
   }

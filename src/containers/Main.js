@@ -26,7 +26,7 @@ class Main extends Component {
           itemTypes={itemTypes}
           changeItemType={changeItemType}
         />
-        <div id="view">
+        <div id="left">
           <Filters
             filters={filters}
             changeFieldValue={changeFieldValue}
@@ -43,12 +43,14 @@ class Main extends Component {
             deleteItem={deleteItem}
           />
         </div>
-        <Add
-          fields={fields}
-          changeFieldValue={changeFieldValue}
-          itemType={itemType}
-          clearForm={clearForm}
-        />
+        <div id="right">
+          <Add
+            fields={fields}
+            changeFieldValue={changeFieldValue}
+            itemType={itemType}
+            clearForm={clearForm}
+          />
+        </div>
       </div>
     )
   }

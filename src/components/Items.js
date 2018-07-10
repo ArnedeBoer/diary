@@ -34,7 +34,7 @@ class Items extends Component {
     }
 
     return (
-      <div id="items">
+      <div className="sub">
         <h1>Items:</h1>
         { itemElements }
       </div>

@@ -20,7 +20,7 @@ class Add extends Component {
     const { itemType, fields, changeFieldValue } = this.props;
 
     return (
-      <div id="add">
+      <div className="sub">
         <h1>Add:</h1>
         <Form
           formType="fields"

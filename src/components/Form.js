@@ -80,7 +80,7 @@ class Form extends Component {
             field.name = fieldName;
 
             return (
-              <div key={index}>
+              <div key={index} className="field">
                 <label>{fields[fieldName].label}</label>
                 {
                   React.cloneElement(
@@ -96,7 +96,7 @@ class Form extends Component {
             )
           })
         }
-        <input id="submit" value="submit" type="submit" onClick={this.handleSubmit}/>
+        <button className="primary-button" onClick={this.handleSubmit}>Submit</button>
         {
           cancel && <button className="cancel" onClick={cancel}>Cancel</button>
         }
