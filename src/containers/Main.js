@@ -15,7 +15,8 @@ class Main extends Component {
     const {
       itemType, filters, fields, itemFields, currentItems,
       changeItemType,
-      changeFieldValue, setItems,
+      changeFieldValue,
+      setItems,
       toggleItemEdit, updateItem, deleteItem,
       clearForm
     } = this.props;

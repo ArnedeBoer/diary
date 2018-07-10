@@ -1,48 +1,48 @@
 .primary-button {
-    -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
-    -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
-    box-shadow:inset 0px 1px 0px 0px #cf866c;
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, tomato), color-stop(1, #d65e46));
-    background:-moz-linear-gradient(top, tomato 5%, #d65e46 100%);
-    background:-webkit-linear-gradient(top, tomato 5%, #d65e46 100%);
-    background:-o-linear-gradient(top, tomato 5%, #d65e46 100%);
-    background:-ms-linear-gradient(top, tomato 5%, #d65e46 100%);
-    background:linear-gradient(to bottom, tomato 5%, #d65e46 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='tomato', endColorstr='#d65e46',GradientType=0);
-    background-color:tomato;
-    -moz-border-radius:3px;
-    -webkit-border-radius:3px;
-    border-radius:3px;
-    border:1px solid #942911;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size: 0.8rem;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #854629;
-    padding: 10px 50px;
-    margin: 0px 20px 20px 0px;
+  -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
+  box-shadow:inset 0px 1px 0px 0px #cf866c;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, tomato), color-stop(1, #d65e46));
+  background:-moz-linear-gradient(top, tomato 5%, #d65e46 100%);
+  background:-webkit-linear-gradient(top, tomato 5%, #d65e46 100%);
+  background:-o-linear-gradient(top, tomato 5%, #d65e46 100%);
+  background:-ms-linear-gradient(top, tomato 5%, #d65e46 100%);
+  background:linear-gradient(to bottom, tomato 5%, #d65e46 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='tomato', endColorstr='#d65e46',GradientType=0);
+  background-color:tomato;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  border:1px solid #942911;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size: 0.8rem;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #854629;
+  padding: 10px 50px;
+  margin: 0px 20px 20px 0px;
 }
 
 .primary-button:hover {
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d65e46), color-stop(1, tomato));
-    background:-moz-linear-gradient(top, #d65e46 5%, tomato 100%);
-    background:-webkit-linear-gradient(top, #d65e46 5%, tomato 100%);
-    background:-o-linear-gradient(top, #d65e46 5%, tomato 100%);
-    background:-ms-linear-gradient(top, #d65e46 5%, tomato 100%);
-    background:linear-gradient(to bottom, #d65e46 5%, tomato 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d65e46', endColorstr='tomato',GradientType=0);
-    background-color:#d65e46;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d65e46), color-stop(1, tomato));
+  background:-moz-linear-gradient(top, #d65e46 5%, tomato 100%);
+  background:-webkit-linear-gradient(top, #d65e46 5%, tomato 100%);
+  background:-o-linear-gradient(top, #d65e46 5%, tomato 100%);
+  background:-ms-linear-gradient(top, #d65e46 5%, tomato 100%);
+  background:linear-gradient(to bottom, #d65e46 5%, tomato 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d65e46', endColorstr='tomato',GradientType=0);
+  background-color:#d65e46;
 }
 
 .primary-button:active {
-    position:relative;
-    top:1px;
+  position:relative;
+  top:1px;
 }
 
 .secondary-button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    margin-right: 20px;
+  margin-top: 15px;
+  padding: 10px 20px;
+  margin-right: 20px;
 }

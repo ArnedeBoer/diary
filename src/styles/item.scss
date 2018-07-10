@@ -1,34 +1,34 @@
 .list-item {
-    margin-bottom: 2rem;
-    background-color: lightgray;
-    padding: 40px;
-    border-radius: 20px;
+  margin-bottom: 2rem;
+  background-color: lightgray;
+  padding: 40px;
+  border-radius: 20px;
 
-    .title {
-        margin-bottom: 1rem;
+  .title {
+    margin-bottom: 1rem;
+  }
+
+  .left {
+    float: left;
+    display: block;
+    width: 70%;
+  }
+
+  .right {
+    float: right;
+    display: block;
+    width: 20%;
+
+    ul {
+      margin: auto;
     }
 
-    .left {
-        float: left;
-        display: block;
-        width: 70%;
+    .sub-list {
+      margin-top: 20px;
     }
 
-    .right {
-        float: right;
-        display: block;
-        width: 20%;
-
-        ul {
-            margin: auto;
-        }
-
-        .sub-list {
-            margin-top: 20px;
-        }
-
-        .people:empty + .locations {
-            margin-top: 0;
-        }
+    .people:empty + .locations {
+      margin-top: 0;
     }
+  }
 }

@@ -2,26 +2,26 @@ import { itemsInfo } from './../defaults';
 
 const fieldValues = (state = itemsInfo, action) => {
   const { type, itemType, formType, fieldName, value } = action;
-	const newState = { ...state };
+  const newState = { ...state };
 
-	switch (type) {
+  switch (type) {
     case 'CHANGE_FIELD_VALUE':
       newState[itemType][formType][fieldName].value = value;
 
       return newState;
 
-		case 'CLEAR_FORM':
-			Object.keys(newState[itemType].fields).forEach(field => {
-				const defaultValue = field.type === 'select' ? [] : '';
+    case 'CLEAR_FORM':
+      Object.keys(newState[itemType].fields).forEach(field => {
+        const defaultValue = field.type === 'select' ? [] : '';
 
-				newState[itemType].fields[field].value = defaultValue;
-			});
+        newState[itemType].fields[field].value = defaultValue;
+      });
 
-			return newState
+      return newState
 
-		default:
-			return state
-	};
+    default:
+      return state
+  };
 };
 
 export default fieldValues;
