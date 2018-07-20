@@ -11,8 +11,10 @@ const fieldValues = (state = itemsInfo, action) => {
       return newState;
 
     case 'CLEAR_FORM':
-      Object.keys(newState[itemType].fields).forEach(field => {
-        const defaultValue = field.type === 'select' ? [] : '';
+      const fields = newState[itemType].fields;
+
+      Object.keys(fields).forEach(field => {
+        const defaultValue = fields[field].type === 'select' ? [] : '';
 
         newState[itemType].fields[field].value = defaultValue;
       });
