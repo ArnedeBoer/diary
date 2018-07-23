@@ -17,18 +17,29 @@ class Filters extends Component {
   }
 
   render() {
-    const { itemType, filters, changeFieldValue } = this.props;
+    const { itemType, filterFields, filters, changeFieldValue } = this.props;
+
+    console.log(filterFields);
 
     return (
       <div className="sub">
         <h1>Filters:</h1>
+        <select defaultValue='default'>
+          <option value='default'>-- select an option --</option>
+          {
+            Object.keys(filterFields).map((filterField, index) => <option value={filterField}>{filterField}</option>)
+          }
+        </select>
         <Form
           formType="filters"
-          fields={filters}
+          fields={filterFields}
           itemType={itemType}
           changeFieldValue={changeFieldValue}
           submit={this.getFiltersAndSetItems}
         />
+        {
+          filters.map((filter, index) => <p key={index}>{filter.name}: {filter.value}</p>)
+        }
       </div>
     )
   }

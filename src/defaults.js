@@ -1,6 +1,6 @@
 export const itemsInfo = {
   pages: {
-    filters: {
+    filterFields: {
       dateStart: {
         type: 'date',
         label: 'Date Start'
@@ -66,7 +66,7 @@ export const itemsInfo = {
     }
   },
   people: {
-    filters: {
+    filterFields: {
       name: {
         type: 'text',
         label: 'Name',
@@ -101,7 +101,7 @@ export const itemsInfo = {
     }
   },
   locations: {
-    filters: {
+    filterFields: {
       name: {
         type: 'text',
         label: 'Name',

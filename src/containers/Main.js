@@ -13,10 +13,10 @@ import { itemTypes } from './../defaults';
 class Main extends Component {
   render() {
     const {
-      itemType, filters, fields, itemFields, currentItems,
+      itemType, filterFields, fields, itemFields, currentItems,
       changeItemType,
       changeFieldValue,
-      setItems,
+      setItems, currentFilters,
       toggleItemEdit, updateItem, deleteItem,
       clearForm
     } = this.props;
@@ -29,7 +29,8 @@ class Main extends Component {
         />
         <div id="left">
           <Filters
-            filters={filters}
+            filterFields={filterFields}
+            filters={currentFilters}
             changeFieldValue={changeFieldValue}
             itemType={itemType}
             setItems={setItems}
@@ -58,14 +59,16 @@ class Main extends Component {
 };
 
 const mapStateToProps = state => {
-  const { items, itemType } = state;
+  const { items, itemType, filters } = state;
   const currentItems = items[itemType];
-  const { filters, fields, itemFields } = state.fieldInfo[itemType];
+  const currentFilters = filters[itemType];
+  const { filterFields, fields, itemFields } = state.fieldInfo[itemType];
 
   return {
     currentItems,
     itemType,
-    filters,
+    filterFields,
+    currentFilters,
     fields,
     itemFields
   }

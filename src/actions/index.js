@@ -3,6 +3,18 @@ export const changeItemType = itemType => ({
   itemType
 });
 
+export const addFilter = (itemType, filter) => ({
+  type: 'ADD_FILTER',
+  itemType,
+  filter
+});
+
+export const removeFilter = (itemType, id) => ({
+  type: 'REMOVE_FILTER',
+  itemType,
+  id
+});
+
 export const setItems = (itemType, items) => ({
   type: 'SET_ITEMS',
   itemType,
