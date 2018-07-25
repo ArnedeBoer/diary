@@ -1,9 +1,5 @@
-const pages = require('./pages');
-const people = require('./people');
-const locations = require('./locations');
+const items = require('./items');
 
 module.exports = {
-  pages,
-  people,
-  locations
+  items
 };

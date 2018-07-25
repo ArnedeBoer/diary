@@ -1,11 +1,19 @@
-const performFetch = (itemType, path, data) =>
-  fetch(`/api/${itemType}/${path}`, {
+const performFetch = (itemType, path, data) => {
+  const mergedDate = Object.assign({}, data);
+
+  mergedDate.itemType = itemType;
+
+  return fetch(`/api/${path}`, {
     method: "POST",
-    body: JSON.stringify(data),
+    body: JSON.stringify(mergedDate),
     headers: {
       "Content-Type": "application/json"
     }
   });
+}
+
+export const fetchItems = (itemType, filters) =>
+  performFetch(itemType, 'filter', filters);
 
 export const fetchAndSetItems = (itemType, setItems, filters) =>
   performFetch(itemType, 'filter', filters)

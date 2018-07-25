@@ -1,20 +1,8 @@
-const pagesController = require('../controllers').pages;
-const peopleController = require('../controllers').people;
-const locationsController = require('../controllers').locations;
+const itemsController = require('../controllers').items;
 
 module.exports = app => {
-  app.post('/api/pages/create', pagesController.create);
-  app.post('/api/pages/filter', pagesController.filter);
-  app.post('/api/pages/edit', pagesController.edit);
-  app.post('/api/pages/delete', pagesController.delete);
-
-  app.post('/api/people/create', peopleController.create);
-  app.post('/api/people/filter', peopleController.filter);
-  app.post('/api/people/edit', peopleController.edit);
-  app.post('/api/people/delete', peopleController.delete);
-
-  app.post('/api/locations/create', locationsController.create);
-  app.post('/api/locations/filter', locationsController.filter);
-  app.post('/api/locations/edit', locationsController.edit);
-  app.post('/api/locations/delete', locationsController.delete);
+  app.post('/api/create', itemsController.create);
+  app.post('/api/filter', itemsController.filter);
+  app.post('/api/edit', itemsController.edit);
+  app.post('/api/delete', itemsController.delete);
 };
