@@ -12,8 +12,13 @@ class Add extends Component {
 
   createItemAndClearForm(itemValues) {
     const { itemType, clearForm } = this.props;
+    let values = {};
 
-    return createItem(itemType, clearForm, itemValues);
+    Object.keys(itemValues).forEach(fieldName => {
+      values[fieldName] = itemValues[fieldName].value;
+    });
+
+    return createItem(itemType, clearForm, values);
   }
 
   render() {

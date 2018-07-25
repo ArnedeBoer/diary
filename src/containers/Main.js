@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setItems, clearForm, changeItemType, changeFieldValue, toggleItemEdit, updateItem, deleteItem } from '../actions';
+import { setItems, addFilter, removeFilter, clearForm, changeItemType, changeFieldValue, toggleItemEdit, updateItem, deleteItem } from '../actions';
 
 import Menu from './../components/Menu';
 import Filters from './../components/Filters';
@@ -16,7 +16,7 @@ class Main extends Component {
       itemType, filterFields, fields, itemFields, currentItems,
       changeItemType,
       changeFieldValue,
-      setItems, currentFilters,
+      setItems, currentFilters, addFilter, removeFilter,
       toggleItemEdit, updateItem, deleteItem,
       clearForm
     } = this.props;
@@ -30,10 +30,12 @@ class Main extends Component {
         <div id="left">
           <Filters
             filterFields={filterFields}
-            filters={currentFilters}
+            currentFilters={currentFilters}
             changeFieldValue={changeFieldValue}
             itemType={itemType}
             setItems={setItems}
+            addFilter={addFilter}
+            removeFilter={removeFilter}
           />
           <Items
             itemFields={itemFields}
@@ -77,6 +79,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     changeItemType,
+    addFilter,
+    removeFilter,
     changeFieldValue,
     setItems,
     clearForm,

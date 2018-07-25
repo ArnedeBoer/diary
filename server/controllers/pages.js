@@ -32,8 +32,8 @@ module.exports = {
   },
   filter(req, res) {
     const isDate = input => moment(input, 'YYYY-MM-DD', true).isValid();
-    const people = req.body.people.map(person => person.id);
-    const locations = req.body.locations.map(location => location.id);
+    const people = req.body.people ? req.body.people.map(person => person.id) : [];
+    const locations = req.body.locations ? req.body.locations.map(location => location.id) : [];
     const dateStart = isDate(req.body.dateStart) ? Date.parse(req.body.dateStart) : null;
     const dateEnd = isDate(req.body.dateEnd) ? Date.parse(req.body.dateEnd) : null;
 

@@ -12,7 +12,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   filter(req, res) {
-    const name = req.body.name;
+    const name = req.body.name || '';
     let filters;
 
     if (name !== null) {

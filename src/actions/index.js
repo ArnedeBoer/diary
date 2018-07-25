@@ -9,10 +9,10 @@ export const addFilter = (itemType, filter) => ({
   filter
 });
 
-export const removeFilter = (itemType, id) => ({
+export const removeFilter = (itemType, filter) => ({
   type: 'REMOVE_FILTER',
   itemType,
-  id
+  filter
 });
 
 export const setItems = (itemType, items) => ({

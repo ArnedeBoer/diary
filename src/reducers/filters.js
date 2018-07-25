@@ -3,24 +3,21 @@ import { itemTypes } from './../defaults';
 let defaultState = {};
 
 itemTypes.forEach(itemType => {
-  defaultState[itemType] = [];
+  defaultState[itemType] = {};
 });
 
 const fieldValues = (state = defaultState, action) => {
-  const { type, itemType, filter, id } = action;
+  const { type, itemType, filter } = action;
   const newState = { ...state };
 
   switch (type) {
     case 'ADD_FILTER':
-      newState[itemType] = newState[itemType].concat(filter);
+      newState[itemType] = Object.assign(newState[itemType], filter);
 
       return newState;
 
     case 'REMOVE_FILTER':
-      newState[itemType] = newState[itemType].filter(filter => {
-        return filter.id !== id;
-      });
-
+      delete newState[itemType][filter.name];
       return newState
 
     default:

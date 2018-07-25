@@ -71,12 +71,17 @@ class Item extends Component {
 
   saveItemAndUpdateItems(itemData) {
     const { itemType, item, toggleItemEdit, updateItem } = this.props;
+    let values = {};
+
+    Object.keys(itemData).forEach(fieldName => {
+      values[fieldName] = itemData[fieldName].value;
+    });
 
     toggleItemEdit(itemType, item.id);
 
-    itemData.id = item.id;
+    values.id = item.id;
 
-    return editItem(itemType, updateItem, itemData);
+    return editItem(itemType, updateItem, values);
   }
 
   render() {

@@ -1,0 +1,41 @@
+.filters {
+  select {
+    margin-bottom: 1rem;
+  }
+
+  .filter-buttons {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+
+    .active {
+      background-color: tomato;
+    }
+  }
+
+  .filter {
+    background-color: lightgray;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+
+      p, button {
+        display: inline-block;
+      }
+
+      p {
+        margin-right: 1rem;
+      }
+
+      button {
+        border: none;
+        border-radius: 50%;
+        height: 1rem;
+        width: 1rem;
+        background-color: gray;
+        color: white;
+        cursor: pointer;
+      }
+  }
+}

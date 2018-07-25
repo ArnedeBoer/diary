@@ -12,6 +12,14 @@ class Form extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
+    this.updateState(props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateState(nextProps);
+  }
+
+  updateState(props) {
     const fields = props.fields;
 
     Object.keys(fields).forEach(fieldName => {
@@ -49,7 +57,6 @@ class Form extends Component {
   handleSubmit(e) {
     const { formType, fields, submit } = this.props;
     const stateFields = this.state.fields;
-    let values = {};
 
     e.preventDefault();
 
@@ -61,12 +68,8 @@ class Form extends Component {
 
     this.setState({ incompleteFields });
 
-    Object.keys(stateFields).forEach(fieldName => {
-      values[fieldName] = stateFields[fieldName].value;
-    });
-
     if ( incompleteFields.length === 0 ) {
-      submit(values).then(status => {
+      submit(stateFields).then(status => {
         if(status === 'success' && formType !== 'itemFields') {
           this.setState({ fields, incompleteFields: [] });
         }
