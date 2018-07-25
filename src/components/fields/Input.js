@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Input extends Component {
   render() {
-    const { fieldInfo, handleChange } = this.props;
+    const { fieldInfo, handleTextChange } = this.props;
     const { type, name, placeholder, value } = fieldInfo;
 
     return (
@@ -11,7 +11,7 @@ class Input extends Component {
         name={name}
         value={value}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={handleTextChange}
       />
     )
   }

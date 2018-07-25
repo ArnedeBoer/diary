@@ -8,7 +8,7 @@ class Form extends Component {
   constructor(props) {
     super(props);
 
-    this.handleSelect = this.handleSelect.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -31,27 +31,21 @@ class Form extends Component {
     this.state = { fields, incompleteFields: [] };
   }
 
-  handleSelect(fieldName, values) {
+  handleChange(name, values) {
     const { itemType, formType, changeFieldValue } = this.props;
     const { fields } = this.state;
 
-    fields[fieldName].value = values;
+    fields[name].value = values;
 
     this.setState({ fields });
 
-    changeFieldValue(itemType, formType, fieldName, values);
+    changeFieldValue(itemType, formType, name, values);
   }
 
-  handleChange(e) {
+  handleTextChange(e) {
     const { name, value } = e.target;
-    const { itemType, formType, changeFieldValue } = this.props;
-    const { fields } = this.state;
 
-    fields[name].value = value;
-
-    this.setState({ fields });
-
-    changeFieldValue(itemType, formType, name, value);
+    this.handleChange(name, value);
   }
 
   handleSubmit(e) {
@@ -102,8 +96,8 @@ class Form extends Component {
                     component,
                     {
                       fieldInfo: field,
-                      handleChange: this.handleChange,
-                      handleSelect: this.handleSelect
+                      handleTextChange: this.handleTextChange,
+                      handleChange: this.handleChange
                     }
                   )
                 }
