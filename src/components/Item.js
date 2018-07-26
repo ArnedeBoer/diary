@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
 
 import Form from './Form';
@@ -85,9 +86,13 @@ class Item extends Component {
   }
 
   render() {
-    const { itemType, item, fields, changeFieldValue } = this.props;
-    const { date, editing, name, description, people, locations } = item;
-    const title = date ? dateformat(date, 'mmmm dS yyyy') : name;
+    const {
+      itemType,
+      fields,
+      changeFieldValue,
+      item: { date, editing, name, description, people, locations }
+    } = this.props;
+    const title = name || dateformat(date, 'mmmm dS yyyy');
 
     if(editing) {
       return (
@@ -131,6 +136,16 @@ class Item extends Component {
       </div>
     )
   }
+};
+
+Item.propTypes = {
+  itemType: PropTypes.string,
+  item: PropTypes.object,
+  toggleItemEdit: PropTypes.func,
+  deleteItem: PropTypes.func,
+  updateItem: PropTypes.func,
+  fields: PropTypes.object,
+  changeFieldValue: PropTypes.func
 };
 
 export default Item;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -58,6 +59,24 @@ class Main extends Component {
       </div>
     )
   }
+};
+
+Main.propTypes = {
+  currentItems: PropTypes.array,
+  itemType: PropTypes.string,
+  filterFields: PropTypes.object,
+  currentFilters: PropTypes.object,
+  fields: PropTypes.object,
+  itemFields: PropTypes.object,
+  changeItemType: PropTypes.func,
+  addFilter: PropTypes.func,
+  removeFilter: PropTypes.func,
+  changeFieldValue: PropTypes.func,
+  setItems: PropTypes.func,
+  clearForm: PropTypes.func,
+  toggleItemEdit: PropTypes.func,
+  updateItem: PropTypes.func,
+  deleteItem: PropTypes.func
 };
 
 const mapStateToProps = state => {

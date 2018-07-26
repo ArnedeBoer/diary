@@ -15,7 +15,12 @@ const config = {
       {
         test : /\.js?/,
         include : APP_DIR,
-        loader : 'babel-loader'
+        loader : ['babel-loader']
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader']
       },
       {
         test : /\.s?css$/,

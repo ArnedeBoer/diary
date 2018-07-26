@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { createItem } from './../api';
 import Form from '../components/Form';
@@ -37,6 +38,13 @@ class Add extends Component {
       </div>
     )
   }
+};
+
+Add.propTypes = {
+  itemType: PropTypes.string,
+  clearForm: PropTypes.func,
+  fields: PropTypes.object,
+  changeFieldValue: PropTypes.func
 };
 
 export default Add;

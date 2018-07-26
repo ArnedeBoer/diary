@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { fetchAndSetItems } from './../api';
 import Form from './Form';
@@ -120,6 +121,16 @@ class Filters extends Component {
       </div>
     )
   }
+};
+
+Filters.propTypes = {
+  itemType: PropTypes.string,
+  setItems: PropTypes.func,
+  currentFilters: PropTypes.object,
+  addFilter: PropTypes.func,
+  filterFields: PropTypes.object,
+  removeFilter: PropTypes.func,
+  changeFieldValue: PropTypes.func,
 };
 
 export default Filters;

@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Input extends Component {
-  render() {
-    const { fieldInfo, handleTextChange } = this.props;
-    const { name, placeholder, value } = fieldInfo;
-
-    return (
-      <textarea
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        onChange={handleTextChange}
-      />
-    )
-  }
+const Textarea = ({
+  handleTextChange,
+  fieldInfo: { name, placeholder, value }
+}) => {
+  return (
+    <textarea
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      onChange={handleTextChange}
+    />
+  );
 };
 
-export default Input;
+Textarea.propTypes = {
+  handleTextChange: PropTypes.func,
+  fieldInfo: PropTypes.object
+};
+
+export default Textarea;

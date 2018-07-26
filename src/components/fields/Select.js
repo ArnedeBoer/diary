@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactSelect from 'react-select';
+import PropTypes from 'prop-types';
 
 import { fetchItems } from './../../api';
 
@@ -21,9 +22,11 @@ class Select extends React.Component {
   }
 
   render() {
-    const { fieldInfo, handleChange } = this.props;
-    const { name, value, placeholder } = fieldInfo;
     const AsyncComponent = ReactSelect.Async;
+    const {
+      handleChange,
+      fieldInfo: { name, value, placeholder }
+    } = this.props;
 
     return (
       <AsyncComponent
@@ -38,6 +41,11 @@ class Select extends React.Component {
       />
     )
   }
-}
+};
+
+Select.propTypes = {
+  handleChange: PropTypes.func,
+  fieldInfo: PropTypes.object
+};
 
 export default Select;

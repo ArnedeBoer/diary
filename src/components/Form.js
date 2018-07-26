@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Input from './fields/Input';
 import Textarea from './fields/Textarea';
@@ -12,10 +13,18 @@ class Form extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.updateState(props);
+    const fields = props.fields;
+
+    Object.keys(fields).forEach(fieldName => {
+      const defaultValue = fields[fieldName].type === 'select' ? [] : '';
+
+      fields[fieldName].value = fields[fieldName].value || defaultValue;
+    });
+
+    this.state = { fields, incompleteFields: [] };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.updateState(nextProps);
   }
 
@@ -28,7 +37,7 @@ class Form extends Component {
       fields[fieldName].value = fields[fieldName].value || defaultValue;
     });
 
-    this.state = { fields, incompleteFields: [] };
+    this.setState({ fields, incompleteFields: [] });
   }
 
   handleChange(name, values) {
@@ -121,6 +130,15 @@ class Form extends Component {
       </form>
     )
   }
+};
+
+Form.propTypes = {
+  itemType: PropTypes.string,
+  changeFieldValue: PropTypes.func,
+  formType: PropTypes.string,
+  fields: PropTypes.object,
+  submit: PropTypes.func,
+  cancel: PropTypes.func
 };
 
 export default Form;
