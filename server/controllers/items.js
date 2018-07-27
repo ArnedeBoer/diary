@@ -16,14 +16,14 @@ module.exports = {
     return items
       .create(newItem)
       .then(page => {
-        const pageid = page.id;
+        const pagesid = page.id;
 
         !!people && people.forEach(person => {
-            pagespeople.create({ pageid, peopleid: person.id });
+            pagespeople.create({ pagesid, peopleid: person.id });
           });
 
         !!locations && locations.forEach(location => {
-            pageslocations.create({ pageid, locationid: location.id });
+            pageslocations.create({ pagesid, locationsid: location.id });
           });
 
         res.status(201).send(page);
@@ -90,21 +90,21 @@ module.exports = {
       )
       .then(result => {
         const updatedPage = result[1][0];
-        const pageid = updatedPage.dataValues.id;
+        const pagesid = updatedPage.dataValues.id;
 
         !!people && pagespeople
-          .destroy({ where: { pageid } })
+          .destroy({ where: { pagesid } })
           .then(() => {
             people.forEach(person => {
-              pagespeople.create({ pageid, peopleid: person.id });
+              pagespeople.create({ pagesid, peopleid: person.id });
             });
           });
 
         !!locations && pageslocations
-          .destroy({ where: { pageid } })
+          .destroy({ where: { pagesid } })
           .then(() => {
             locations.forEach(location => {
-              pageslocations.create({ pageid, locationid: location.id });
+              pageslocations.create({ pagesid, locationsid: location.id });
             });
           });
 

@@ -24,12 +24,8 @@ class Form extends Component {
     this.state = { fields, incompleteFields: [] };
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.updateState(nextProps);
-  }
-
-  updateState(props) {
-    const fields = props.fields;
+  componentWillReceiveProps(nextProps) {
+    const fields = nextProps.fields;
 
     Object.keys(fields).forEach(fieldName => {
       const defaultValue = fields[fieldName].type === 'select' ? [] : '';
