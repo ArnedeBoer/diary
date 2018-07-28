@@ -1,5 +1,5 @@
 form {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 
   label, input, textarea {
     display: block;
@@ -7,15 +7,15 @@ form {
   }
 
   .field {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
   }
 
   textarea {
-    height: 200px;
+    height: 13rem;
   }
 
   .validation {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     color: red;
   }
 };

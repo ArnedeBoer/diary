@@ -37,7 +37,7 @@ db[mainName].associate = models => {
   subNames.forEach(subName => {
     db[mainName].belongsToMany(models[subName], {
       through: models[`${mainName}${subName}`],
-      foreignKey: 'pagesid',
+      foreignKey: `${mainName}id`,
       as: subName
     });
   });

@@ -6,28 +6,32 @@ import Form from './Form';
 
 import { editItem, setItemToFalse } from './../api';
 
-const generateSublist = (type, listItems) => {
-  if ( !listItems || !listItems.length ) {
-    return
-  }
+const generateRelationLists = relationArrays => {
+  return Object.keys(relationArrays).map((relationType, index) => {
+    const relationArray = relationArrays[relationType];
 
-  const label = type[0].toUpperCase() + type.slice(1);
-  const className = `sub-list ${type}`;
+    if ( !relationArray.length ) {
+      return;
+    }
 
-  return (
-    <div className={className}>
-      <h4>{label}</h4>
-      <ul>
-        {
-          listItems.map(item => {
-            return (
-              <li key={item.id}>{item.name}</li>
-            )
-          })
-        }
-      </ul>
-    </div>
-  )
+    const label = relationType[0].toUpperCase() + relationType.slice(1);
+    const className = `sub-list ${relationType}`;
+
+    return (
+      <div key={index} className={className}>
+        <h4>{label}</h4>
+        <ul>
+          {
+            relationArray.map(item => {
+              return (
+                <li key={item.id}>{item.name}</li>
+              )
+            })
+          }
+        </ul>
+      </div>
+    )
+  });
 };
 
 class Item extends Component {
@@ -90,9 +94,17 @@ class Item extends Component {
       itemType,
       fields,
       changeFieldValue,
-      item: { date, editing, name, description, people, locations }
+      item,
+      item: { date, editing, name, description }
     } = this.props;
     const title = name || dateformat(date, 'mmmm dS yyyy');
+    const relationArrays = {};
+
+    Object.keys(item).forEach(relationType => {
+      if (item[relationType].constructor === Array) {
+        relationArrays[relationType] = item[relationType];
+      }
+    });
 
     if(editing) {
       return (
@@ -128,8 +140,7 @@ class Item extends Component {
         </div>
 
         <div className="right">
-          {generateSublist('people', people)}
-          {generateSublist('locations', locations)}
+          {generateRelationLists(relationArrays)}
         </div>
         <div className="info-end" style={{clear: 'both'}}></div>
         <button className="secondary-button" onClick={this.toggle}>Edit</button>
