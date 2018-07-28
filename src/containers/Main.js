@@ -9,7 +9,7 @@ import Menu from './../components/Menu';
 import Filters from './../components/Filters';
 import Items from './../components/Items';
 import Add from './../components/Add';
-import { itemTypes } from './../defaults';
+import { itemTypes } from './../../shared/defaults';
 
 class Main extends Component {
   render() {

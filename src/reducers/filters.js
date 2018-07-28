@@ -1,4 +1,4 @@
-import { itemTypes } from './../defaults';
+import { itemTypes } from './../../shared/defaults';
 
 let defaultState = {};
 

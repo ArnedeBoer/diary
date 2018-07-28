@@ -1,3 +1,4 @@
+const { mainName, relationNames } = require('./../../shared/defaults.js');
 const Sequelize = require('sequelize');
 let config;
 
@@ -13,13 +14,11 @@ const description = { type: Sequelize.TEXT, allowNull: false };
 const active = { type: Sequelize.BOOLEAN,  allowNull: false, defaultValue: true };
 const timestamp = { timestamps: false};
 
-const mainName = 'pages';
 const mainColumns = {date, description, active};
-const subNames = ['people', 'locations'];
 const subColumns = {name, description, active};
 
 let definitions = { [mainName]: mainColumns };
-subNames.forEach(subName => { definitions[subName] = subColumns });
+relationNames.forEach(relationName => { definitions[relationName] = subColumns });
 
 let db = {};
 
@@ -34,11 +33,11 @@ Object.keys(definitions).forEach(definition => {
 });
 
 db[mainName].associate = models => {
-  subNames.forEach(subName => {
-    db[mainName].belongsToMany(models[subName], {
-      through: models[`${mainName}${subName}`],
+  relationNames.forEach(relationName => {
+    db[mainName].belongsToMany(models[relationName], {
+      through: models[`${mainName}${relationName}`],
       foreignKey: `${mainName}id`,
-      as: subName
+      as: relationName
     });
   });
 };

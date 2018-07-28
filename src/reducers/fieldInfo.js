@@ -1,4 +1,4 @@
-import { itemsInfo } from './../defaults';
+import { itemsInfo } from './../../shared/defaults';
 
 const fieldValues = (state = itemsInfo, action) => {
   const { type, itemType, formType, fieldName, value } = action;

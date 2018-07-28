@@ -1,4 +1,4 @@
-import { itemTypes } from './../defaults';
+import { itemTypes } from './../../shared/defaults';
 
 const currentItemType = window.location.href.split('/')[3];
 const startingItemType = itemTypes.includes(currentItemType) ? currentItemType : itemTypes[0];
