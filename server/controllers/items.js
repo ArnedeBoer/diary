@@ -3,9 +3,6 @@ const pagespeople = require('../models').pagespeople;
 const People = require('../models').people;
 const Locations = require('../models').locations;
 const Op = require('sequelize').Op;
-const moment = require('moment');
-
-const isDate = input => moment(input, 'YYYY-MM-DD', true).isValid();
 
 module.exports = {
   create(req, res) {
