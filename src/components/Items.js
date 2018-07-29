@@ -5,13 +5,19 @@ import dateformat from 'dateformat';
 import Item from './Item';
 
 const Items = ({
-  items, itemType, itemFields, toggleItemEdit, updateItem, changeFieldValue, deleteItem
+  items, itemType, search, itemFields, toggleItemEdit, updateItem, changeFieldValue, deleteItem
 }) => {
   const displayItems = !!items.length;
 
   return (
     <div className="sub items">
       <h1>Items:</h1>
+      <button
+        onClick={search}
+        className="primary-button"
+      >
+        Search
+      </button>
       {
         !displayItems && <div className="list-item">Geen items gevonden.</div>
       }
@@ -44,6 +50,7 @@ const Items = ({
 Items.propTypes = {
   items: PropTypes.array,
   itemType: PropTypes.string,
+  search: PropTypes.func,
   itemFields: PropTypes.object,
   toggleItemEdit: PropTypes.func,
   updateItem: PropTypes.func,

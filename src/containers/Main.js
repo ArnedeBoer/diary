@@ -10,8 +10,28 @@ import Filters from './../components/Filters';
 import Items from './../components/Items';
 import Add from './../components/Add';
 import { itemTypes } from './../../shared/defaults';
+import { fetchAndSetItems } from './../api';
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.search = this.search.bind(this);
+  }
+
+  search() {
+    const { itemType, setItems, currentFilters } = this.props;
+
+    const filters = Object.assign({}, currentFilters);
+    let filterValues = {};
+
+    Object.keys(filters).forEach(fieldName => {
+      filterValues[fieldName] = filters[fieldName].value;
+    });
+
+    return fetchAndSetItems(itemType, setItems, filterValues);
+  }
+
   render() {
     const {
       itemType, filterFields, fields, itemFields, currentItems,
@@ -34,14 +54,17 @@ class Main extends Component {
             currentFilters={currentFilters}
             changeFieldValue={changeFieldValue}
             itemType={itemType}
+            search={this.search}
             setItems={setItems}
             addFilter={addFilter}
             removeFilter={removeFilter}
           />
+          <div className="sub-devider"></div>
           <Items
             itemFields={itemFields}
             items={currentItems}
             itemType={itemType}
+            search={this.search}
             changeFieldValue={changeFieldValue}
             toggleItemEdit={toggleItemEdit}
             updateItem={updateItem}

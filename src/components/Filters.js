@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { fetchAndSetItems } from './../api';
 import Form from './Form';
 
 class Filters extends Component {
@@ -16,25 +15,20 @@ class Filters extends Component {
   }
 
   getFiltersAndSetItems(addedFilter) {
-    const { itemType, setItems, currentFilters } = this.props;
+    const { itemType, search, currentFilters } = this.props;
     const filterName = Object.keys(addedFilter)[0];
     const filterIsFilled = !!addedFilter[filterName].value.length;
 
     if (filterIsFilled) {
       const { addFilter } = this.props;
       const combinedFilters = Object.assign({}, currentFilters, addedFilter);
-      let filterValues = {};
-
-      Object.keys(combinedFilters).forEach(fieldName => {
-        filterValues[fieldName] = combinedFilters[fieldName].value;
-      });
 
       addFilter(itemType, addedFilter);
 
-      return fetchAndSetItems(itemType, setItems, filterValues);
+      return search(combinedFilters);
     }
 
-    return fetchAndSetItems(itemType, setItems, currentFilters);
+    return search(currentFilters);
   }
 
   toggleFilter(e) {
@@ -46,18 +40,14 @@ class Filters extends Component {
 
   removeFilter(e) {
     const filterName = e.target.name;
-    const { itemType, setItems, currentFilters, removeFilter } = this.props;
+    const { itemType, search, currentFilters, removeFilter } = this.props;
     let filterValues = Object.assign({}, currentFilters);
 
     delete filterValues[filterName];
 
-    Object.keys(filterValues).forEach(fieldName => {
-      filterValues[fieldName] = filterValues[fieldName].value;
-    });
-
     removeFilter(itemType, currentFilters[filterName]);
 
-    return fetchAndSetItems(itemType, setItems, filterValues);
+    return search(filterValues);
   }
 
   render() {
@@ -125,7 +115,7 @@ class Filters extends Component {
 
 Filters.propTypes = {
   itemType: PropTypes.string,
-  setItems: PropTypes.func,
+  search: PropTypes.func,
   currentFilters: PropTypes.object,
   addFilter: PropTypes.func,
   filterFields: PropTypes.object,
