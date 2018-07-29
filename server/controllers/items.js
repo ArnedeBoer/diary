@@ -31,7 +31,7 @@ module.exports = {
   filter(req, res) {
     const { itemType, name, dateStart, dateEnd } = req.body;
     const items = models[itemType];
-    const order = itemType === mainName ? 'date' : 'name';
+    const order = itemType === mainName ? ['date', 'DESC'] : ['name', 'ASC'];
 
     let filters = { active: true };
     let dateFilters = {};
@@ -53,7 +53,7 @@ module.exports = {
       .findAll({
         include: itemType === mainName ? includes : [],
         where: { [Op.and]: filters },
-        order: [[order, 'DESC']]
+        order: [order]
       })
       .then(result => {
         if (itemType !== mainName) {
