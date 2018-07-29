@@ -1,38 +1,37 @@
-const pageslocations = require('../models').pageslocations;
-const pagespeople = require('../models').pagespeople;
-const People = require('../models').people;
-const Locations = require('../models').locations;
+const { mainName, relationNames } = require('./../../shared/defaults.js');
 const Op = require('sequelize').Op;
+const models = require('../models');
 
 module.exports = {
   create(req, res) {
-    const { itemType, name, date, description, people, locations } = req.body;
-    const items = require('../models')[itemType];
+    const { itemType, name, date, description } = req.body;
+    const items = models[itemType];
     const newItem = {name, date, description};
 
     return items
       .create(newItem)
-      .then(page => {
-        const pagesid = page.id;
+      .then(item => {
+        Object.keys(req.body).forEach(relationType => {
+          if (req.body[relationType].constructor === Array) {
+            const model = models[`${mainName}${relationType}`];
 
-        !!people && people.forEach(person => {
-            pagespeople.create({ pagesid, peopleid: person.id });
-          });
+            req.body[relationType].forEach(relation => {
+              model.create({
+                [`${mainName}id`]: item.id,
+                [`${relationType}id`]: relation.id
+              });
+            });
+          }
+        });
 
-        !!locations && locations.forEach(location => {
-            pageslocations.create({ pagesid, locationsid: location.id });
-          });
-
-        res.status(201).send(page);
+        res.status(201).send(item);
       })
       .catch(error => res.status(400).send(error));
   },
   filter(req, res) {
-    const { itemType, name, dateStart, dateEnd, people, locations } = req.body;
-    const items = require('../models')[itemType];
-    const order = itemType === 'pages' ? 'date' : 'name';
-    const filterPeopleIds = people ? people.map(person => person.id) : [];
-    const filterLocationIds = locations ? locations.map(location => location.id) : [];
+    const { itemType, name, dateStart, dateEnd } = req.body;
+    const items = models[itemType];
+    const order = itemType === mainName ? 'date' : 'name';
 
     let filters = { active: true };
     let dateFilters = {};
@@ -43,38 +42,47 @@ module.exports = {
 
     name && (filters.name = { [Op.iLike]: `%${name}%` });
 
-    const includes = [
-      { model: People, required: false, where: { active: true }, as: 'people' },
-      { model: Locations, required: false, where: { active: true }, as: 'locations' }
-    ];
+    const includes = relationNames.map(relationName => ({
+      model: models[relationName],
+      required: false,
+      where: { active: true },
+      as: relationName
+    }));
 
     return items
       .findAll({
-        include: itemType === 'pages' ? includes : [],
+        include: itemType === mainName ? includes : [],
         where: { [Op.and]: filters },
         order: [[order, 'DESC']]
       })
       .then(result => {
-        if (itemType !== 'pages') {
+        if (itemType !== mainName) {
           res.status(200).send(result);
           return;
         }
 
-        const correctPages = result.filter(page => {
-          const arrayContainsArray = (arr1, arr2) => arr1.every(person => arr2.includes(person))
-          const pagePeopleIds = page.dataValues.people.map(person => person.dataValues.id);
-          const pageLocationIds = page.dataValues.locations.map(location => location.dataValues.id);
+        const arrayContainsArray = (arr1, arr2) => arr1.every(val => arr2.includes(val));
+        let filteredItems = result;
 
-          return arrayContainsArray(filterPeopleIds, pagePeopleIds) && arrayContainsArray(filterLocationIds, pageLocationIds);
+        Object.keys(req.body).forEach(relationType => {
+          if (req.body[relationType].constructor === Array) {
+            const filterIds = req.body[relationType].map(relation => relation.id);
+
+            filteredItems = filteredItems.filter(item => {
+              const itemIds = item.dataValues[relationType].map(relation => relation.id);
+
+              return arrayContainsArray(filterIds, itemIds);
+            });
+          }
         });
 
-        res.status(200).send(correctPages);
+        res.status(200).send(filteredItems);
       })
       .catch(error => res.status(400).send(error));
   },
   edit(req, res) {
-    const { itemType, id, name, date, description, people, locations } = req.body;
-    const items = require('../models')[itemType];
+    const { itemType, id, name, date, description } = req.body;
+    const items = models[itemType];
     const newItem = {name, date, description};
 
     return items
@@ -86,32 +94,33 @@ module.exports = {
         }
       )
       .then(result => {
-        const updatedPage = result[1][0];
-        const pagesid = updatedPage.dataValues.id;
+        const updatedItem = result[1][0];
+        const itemid = updatedItem.dataValues.id;
 
-        !!people && pagespeople
-          .destroy({ where: { pagesid } })
-          .then(() => {
-            people.forEach(person => {
-              pagespeople.create({ pagesid, peopleid: person.id });
-            });
-          });
+        Object.keys(req.body).forEach(relationType => {
+          if (req.body[relationType].constructor === Array) {
+            const model = models[`${mainName}${relationType}`];
 
-        !!locations && pageslocations
-          .destroy({ where: { pagesid } })
-          .then(() => {
-            locations.forEach(location => {
-              pageslocations.create({ pagesid, locationsid: location.id });
-            });
-          });
+            model
+              .destroy({ where: { [`${mainName}id`]: itemid }})
+              .then(() => {
+                req.body[relationType].forEach(relation => {
+                  model.create({
+                    [`${mainName}id`]: itemid,
+                    [`${relationType}id`]: relation.id
+                  });
+                });
+              });
+          }
+        });
 
-        res.status(201).send(updatedPage);
+        res.status(201).send(updatedItem);
       })
       .catch(error => res.status(400).send(error));
   },
   delete(req, res) {
     const { itemType, id } = req.body;
-    const items = require('../models')[itemType];
+    const items = models[itemType];
 
     return items
       .update(

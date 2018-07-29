@@ -1,6 +1,6 @@
 # Diary
 
-This app allows you to create records for each day, person and location. The people and locations can be referenced in the records of the day, which can be filtered based on date, people and locations. This allows you to for example quickly find the day on which you met X at location Y.
+This app allows you to create records for each day, and records for relating attributes (defaults: people, locations). The recorded days can be filtered back on dates and their relations. For example: Show me all diary entries after date 01-01-2018 when I've met Bob and when I've visited The Prancing Pony.
 
 ## Background
 
