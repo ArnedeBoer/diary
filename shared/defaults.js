@@ -20,6 +20,16 @@
           type: 'select',
           label: 'Location',
           placeholder: 'Cafe Bax, Cafe Lennep, ...'
+        },
+        type: {
+          type: 'select',
+          label: 'Type',
+          placeholder: 'Holiday, Kingsday, ...'
+        },
+        country: {
+          type: 'select',
+          label: 'Country',
+          placeholder: 'The Netherlands, Vietnam, ...'
         }
       },
       fields: {
@@ -42,6 +52,16 @@
           type: 'select',
           label: 'Location',
           placeholder: 'Cafe Bax, Cafe Lennep, ...',
+        },
+        type: {
+          type: 'select',
+          label: 'Type',
+          placeholder: 'Holiday, Kingsday, ...'
+        },
+        country: {
+          type: 'select',
+          label: 'Country',
+          placeholder: 'The Netherlands, Vietnam, ...'
         }
       },
       itemFields: {
@@ -64,6 +84,16 @@
           type: 'select',
           label: 'Location',
           placeholder: 'Cafe Bax, Cafe Lennep, ...'
+        },
+        type: {
+          type: 'select',
+          label: 'Type',
+          placeholder: 'Holiday, Kingsday, ...'
+        },
+        country: {
+          type: 'select',
+          label: 'Country',
+          placeholder: 'The Netherlands, Vietnam, ...'
         }
       }
     }
@@ -131,6 +161,76 @@
           type: 'text',
           label: 'Name',
           placeholder: 'Cafe Bax, Cafe Lennep, ...',
+          required: true
+        },
+        description: {
+          type: 'textarea',
+          label: 'Description',
+          placeholder: 'A description...'
+        }
+      }
+    },
+    type: {
+      filterFields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'Holiday, Kingsday, ...'
+        }
+      },
+      fields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'Holiday, Kingsday, ...',
+          required: true
+        },
+        description: {
+          type: 'textarea',
+          label: 'Description',
+          placeholder: 'A description...'
+        }
+      },
+      itemFields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'Holiday, Kingsday, ...',
+          required: true
+        },
+        description: {
+          type: 'textarea',
+          label: 'Description',
+          placeholder: 'A description...'
+        }
+      }
+    },
+    country: {
+      filterFields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'The Netherlands, Vietnam, ...'
+        }
+      },
+      fields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'The Netherlands, Vietnam, ...',
+          required: true
+        },
+        description: {
+          type: 'textarea',
+          label: 'Description',
+          placeholder: 'A description...'
+        }
+      },
+      itemFields: {
+        name: {
+          type: 'text',
+          label: 'Name',
+          placeholder: 'The Netherlands, Vietnam, ...',
           required: true
         },
         description: {
