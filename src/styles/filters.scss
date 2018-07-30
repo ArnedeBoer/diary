@@ -5,10 +5,13 @@
 
   .filter-buttons {
     margin-right: 1rem;
-    margin-bottom: 1rem;
 
     .active {
       background-color: tomato;
+    }
+
+    button {
+      margin-bottom: 1rem;
     }
   }
 
