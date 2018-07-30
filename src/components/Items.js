@@ -7,11 +7,12 @@ import Item from './Item';
 const Items = ({
   items, itemType, search, itemFields, toggleItemEdit, updateItem, changeFieldValue, deleteItem
 }) => {
-  const displayItems = !!items.length;
+  const itemsCount = items.length;
+  const displayItems = !!itemsCount;
 
   return (
     <div className="sub items">
-      <h1>Items:</h1>
+      <h1>Items: ({itemsCount})</h1>
       <button
         onClick={search}
         className="primary-button"
