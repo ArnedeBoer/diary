@@ -22,8 +22,12 @@ class Filters extends Component {
     if (filterIsFilled) {
       const { addFilter } = this.props;
       const combinedFilters = Object.assign({}, currentFilters, addedFilter);
+      const filterName = this.state.selectedFilter;
+      const newFilter = {
+        [filterName]: Object.assign({}, addedFilter[filterName])
+      };
 
-      addFilter(itemType, addedFilter);
+      addFilter(itemType, newFilter);
 
       return search(combinedFilters);
     }
