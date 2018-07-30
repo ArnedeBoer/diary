@@ -10,7 +10,7 @@ const sequelize = new Sequelize(database, username, password, { host, port, prot
 
 const date = { type: Sequelize.DATE, allowNull: false };
 const name = { type: Sequelize.STRING, allowNull: false };
-const description = { type: Sequelize.TEXT, allowNull: false };
+const description = { type: Sequelize.TEXT, allowNull: true };
 const active = { type: Sequelize.BOOLEAN,  allowNull: false, defaultValue: true };
 const timestamp = { timestamps: false};
 
