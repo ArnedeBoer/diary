@@ -24,16 +24,12 @@ class Form extends Component {
     this.state = { fields, incompleteFields: [] };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const fields = nextProps.fields;
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.fields !== prevState.fields) {
+      return ({ fields: nextProps.fields })
+    }
 
-    Object.keys(fields).forEach(fieldName => {
-      const defaultValue = fields[fieldName].type === 'select' ? [] : '';
-
-      fields[fieldName].value = fields[fieldName].value || defaultValue;
-    });
-
-    this.setState({ fields, incompleteFields: [] });
+    return ({ fields: prevState.fields});
   }
 
   handleChange(name, values) {
