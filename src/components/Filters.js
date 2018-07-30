@@ -32,7 +32,7 @@ class Filters extends Component {
       return search(combinedFilters);
     }
 
-    return search(currentFilters);
+    return Promise.resolve();
   }
 
   toggleFilter(e) {
