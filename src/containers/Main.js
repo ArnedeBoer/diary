@@ -45,6 +45,7 @@ class Main extends Component {
     return (
       <div key={itemType}>
         <Menu
+          itemType={itemType}
           itemTypes={itemTypes}
           changeItemType={changeItemType}
         />

@@ -13,20 +13,20 @@ class Menu extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(path, e) {
+  handleClick(location, e) {
     e.preventDefault();
 
     const { changeItemType } = this.props;
-    const itemType = path.substring(1);
-    const stateObj = { itemType };
+    const stateObj = { location };
 
-    changeItemType(itemType);
+    changeItemType(location);
 
-    history.pushState(stateObj, itemType, itemType);
+    history.pushState(stateObj, location, location);
   }
 
   render() {
-    const menuItems = this.props.itemTypes.map(itemType => createMenuInfo(itemType));
+    const { itemType, itemTypes } = this.props;
+    const menuItems = itemTypes.map(itemType => createMenuInfo(itemType));
 
     return (
       <div id="menu">
@@ -34,9 +34,18 @@ class Menu extends Component {
           {
             menuItems.map((menuItem, index) => {
               const { path, label } = menuItem;
+              const location = path.substring(1);
+              const linkClass = location === itemType ? 'active' : 'inactive';
+
               return (
                 <li key={index}>
-                  <a href={path} onClick={this.handleClick.bind(this, path)}>{label}</a>
+                  <a
+                    className={linkClass}
+                    href={path}
+                    onClick={this.handleClick.bind(this, location)}
+                  >
+                    {label}
+                  </a>
                 </li>
               )
             })
@@ -49,6 +58,7 @@ class Menu extends Component {
 
 Menu.propTypes = {
   changeItemType: PropTypes.func,
+  itemType: PropTypes.string,
   itemTypes: PropTypes.array
 };
 
