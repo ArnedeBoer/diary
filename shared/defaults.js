@@ -1,250 +1,70 @@
 (function(exports){
-
-  const mainDefaults = {
-    pages: {
-      filterFields: {
-        dateStart: {
-          type: 'date',
-          label: 'Date Start'
-        },
-        dateEnd: {
-          type: 'date',
-          label: 'Date End'
-        },
-        people: {
-          type: 'select',
-          label: 'People',
-          placeholder: 'Bob, Mary, ...'
-        },
-        locations: {
-          type: 'select',
-          label: 'Location',
-          placeholder: 'Cafe Bax, Cafe Lennep, ...'
-        },
-        type: {
-          type: 'select',
-          label: 'Type',
-          placeholder: 'Holiday, Kingsday, ...'
-        },
-        country: {
-          type: 'select',
-          label: 'Country',
-          placeholder: 'The Netherlands, Vietnam, ...'
-        }
-      },
-      fields: {
-        date: {
-          type: 'date',
-          label: 'Date',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        },
-        people: {
-          type: 'select',
-          label: 'People',
-          placeholder: 'Bob, Mary, ...'
-        },
-        locations: {
-          type: 'select',
-          label: 'Location',
-          placeholder: 'Cafe Bax, Cafe Lennep, ...',
-        },
-        type: {
-          type: 'select',
-          label: 'Type',
-          placeholder: 'Holiday, Kingsday, ...'
-        },
-        country: {
-          type: 'select',
-          label: 'Country',
-          placeholder: 'The Netherlands, Vietnam, ...'
-        }
-      },
-      itemFields: {
-        date: {
-          type: 'date',
-          label: 'Date',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        },
-        people: {
-          type: 'select',
-          label: 'People',
-          placeholder: 'Bob, Mary, ...'
-        },
-        locations: {
-          type: 'select',
-          label: 'Location',
-          placeholder: 'Cafe Bax, Cafe Lennep, ...'
-        },
-        type: {
-          type: 'select',
-          label: 'Type',
-          placeholder: 'Holiday, Kingsday, ...'
-        },
-        country: {
-          type: 'select',
-          label: 'Country',
-          placeholder: 'The Netherlands, Vietnam, ...'
-        }
-      }
-    }
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+  const main = 'pages';
+  const relations = {
+    people: 'Bob, Mary, ...',
+    locations: 'Cafe Bax, Cafe Lennep, ...',
+    type: 'Holiday, Kingsday, ...',
+    country: 'The Netherlands, Vietnam, ...'
   };
 
-  const relationDefaults = {
-    people: {
-      filterFields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Bob, Mary, ...'
-        }
-      },
-      fields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Bob, Mary, ...',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        }
-      },
-      itemFields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Bob, Mary, ...',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        }
-      }
+  const createField = (type, label, placeholder, required) => ({type, label, placeholder, required});
+  const createName = (placeholder, required) => createField('text', 'Name', placeholder, required);
+  const createDate = (label, required) => createField('date', label, undefined, required);
+  const createDescription = () => createField('textarea', 'Description', 'A description...', false);
+  const createRelation = (name, placeholder) => createField('select', capitalize(name), placeholder, false);
+  const createSections = ({filters, fields}) => ({
+      filterFields: filters,
+      fields: JSON.parse(JSON.stringify(fields)),
+      itemFields: JSON.parse(JSON.stringify(fields))
+    });
+
+  const mainFields = {
+    filters: {
+      dateStart: createDate('Date Start', false),
+      dateEnd: createDate('Date End', false)
     },
-    locations: {
-      filterFields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Cafe Bax, Cafe Lennep, ...'
-        },
-      },
-      fields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Cafe Bax, Cafe Lennep, ...',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        }
-      },
-      itemFields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Cafe Bax, Cafe Lennep, ...',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        }
-      }
-    },
-    type: {
-      filterFields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Holiday, Kingsday, ...'
-        }
-      },
-      fields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Holiday, Kingsday, ...',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        }
-      },
-      itemFields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'Holiday, Kingsday, ...',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        }
-      }
-    },
-    country: {
-      filterFields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'The Netherlands, Vietnam, ...'
-        }
-      },
-      fields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'The Netherlands, Vietnam, ...',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        }
-      },
-      itemFields: {
-        name: {
-          type: 'text',
-          label: 'Name',
-          placeholder: 'The Netherlands, Vietnam, ...',
-          required: true
-        },
-        description: {
-          type: 'textarea',
-          label: 'Description',
-          placeholder: 'A description...'
-        }
-      }
+    fields: {
+      date: createDate('Date', true),
+      description: createDescription()
     }
   };
+  const getRelationFields = placeholder => ({
+    filters: {
+      name: createName(placeholder, false)
+    },
+    fields: {
+      name: createName(placeholder, true),
+      description: createDescription()
+    }
+  });
 
-  exports.mainName = Object.keys(mainDefaults)[0];
-  exports.relationNames = Object.keys(relationDefaults);
-  exports.itemsInfo = Object.assign(mainDefaults, relationDefaults);
-  exports.itemTypes = [exports.mainName].concat(exports.relationNames);
+  // set the main itemType, with its sections, with its basic fields
+  const defaults = {
+    [main]: createSections(mainFields)
+  };
+
+  // add the relation fields to the sections of the itemType
+  Object.keys(defaults[main]).forEach(section => {
+    Object.keys(relations).forEach(relation => {
+      const placeholder = relations[relation];
+
+      defaults[main][section][relation] = createRelation(relation, placeholder);
+    });
+  });
+
+  // set the relation itemTypes, with their sections, with their basic fields
+  Object.keys(relations).forEach(relation => {
+    const placeholder = relations[relation]
+    const relationFields = getRelationFields(placeholder);
+
+    defaults[relation] = createSections(relationFields);
+  });
+
+  // exports
+  exports.mainName = main;
+  exports.relationNames = Object.keys(relations);
+  exports.itemsInfo = defaults;
+  exports.itemTypes = Object.keys(defaults);
 
 }(typeof exports === 'undefined' ? this.share = {} : exports));
